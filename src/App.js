@@ -20,6 +20,7 @@ function App() {
           type="text" 
           placeholder="Job Board" 
           className="job-board-field"/>
+        <input type="button" value="Submit Job" />
       </form>
     </div>
   );
