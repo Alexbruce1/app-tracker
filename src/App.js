@@ -1,8 +1,19 @@
+import { useState, useEffect } from 'react';
 import './App.css';
 
-const today = new Date();
 
 function App() {
+  const [currentDate, setCurrentDate] = useState("");
+  
+  useEffect(() => {
+    const today = new Date().toISOString().split("T")[0];
+    setCurrentDate(today);
+  }, []);
+
+  const saveJob = e => {
+    e.preventDefault();
+  }
+
   return (
     <div className="App">
       <div className="header">
@@ -11,21 +22,23 @@ function App() {
         </h1>
       </div>
       <div className="application-form-outline">
-        <form className="application-submit-form">
+        <form className="application-submit-form" onSubmit={saveJob}>
           <input 
             type="text" 
             placeholder="Company Applied To" 
-            className="form-element company-field"/>
+            className="form-element company-field"
+            autoComplete="off"/>
           <input 
             type="date" 
             placeholder="Date Applied" 
-            className="form-element date-applied-field"/>
+            className="form-element date-applied-field"
+            defaultValue={currentDate}/>
           <input 
             type="text" 
             placeholder="Job Board Used" 
             className="form-element job-board-field"/>
           <input 
-            type="button" 
+            type="submit" 
             value="Save Job" 
             className="form-element form-submit" />
         </form>

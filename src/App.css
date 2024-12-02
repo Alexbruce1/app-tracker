@@ -19,6 +19,7 @@
 }
 
 .form-element {
+  /* background-color: #444; */
   width: 100%;
   box-sizing: border-box;
   margin: 10px auto;
