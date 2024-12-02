@@ -1,9 +1,29 @@
 .header {
   text-align: center;
+  width: 100%;
+  color: #fff;
 }
 
-.application-form-outline {
-  background-image: linear-gradient(143deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+.app-header-background {
+  background-image: linear-gradient(300deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+  height: 300px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+
+.app-header-fade {
+  height: 250px;
+  background-image: linear-gradient(transparent 1%, #fafafa);
+  position: absolute;
+  top: 50px;
+  height: 250px;
+  width: 100%;
+  z-index: -1;
+}
+
+.app-content {
   padding: 10px;
   border-radius: 15px;
   width: 800px;
@@ -11,22 +31,28 @@
   box-sizing: border-box;
 }
 
+.application-form-outline {
+  /* background-image: linear-gradient(143deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%); */
+  /* position: relative; */
+  /* top: -450px; */
+  background-color: #fff;
+}
+
 .application-submit-form {
   border-radius: 8px;
   display: flex;
   width: 100%;
-  background-color: white;
 }
 
 .form-element {
   width: 100%;
   box-sizing: border-box;
-  margin: 10px auto;
+  margin: 0;
   height: 40px;
   padding: 5px 20px;
   border: none;
   outline: none;
-  margin: 10px;
+  font-size: 16px;
 }
 
 .form-submit {
@@ -35,4 +61,5 @@
   color: #fff;
   font-size: 16px;
   font-weight: 600;
+  margin-left: 10px;
 }
