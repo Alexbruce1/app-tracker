@@ -16,6 +16,8 @@ function App() {
 
   return (
     <div className="App">
+      <div className="app-header-background"></div>
+      <div className="app-header-fade"></div>
       <div className="header">
         <h1>
           App-Tracker

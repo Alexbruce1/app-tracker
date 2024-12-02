@@ -1,9 +1,28 @@
 .header {
   text-align: center;
+  position: absolute;
+  width: 100%;
+  top: 0%;
+  color: #fff;
+}
+
+.app-header-background {
+  background-image: linear-gradient(300deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+  height: 300px;
+  width: 100%;
+}
+
+.app-header-fade {
+  height: 250px;
+  background-image: linear-gradient(transparent 1%, #fff);
+  position: relative;
+  bottom: 250px;
 }
 
 .application-form-outline {
-  background-image: linear-gradient(143deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+  /* background-image: linear-gradient(143deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%); */
+  position: relative;
+  top: -450px;
   padding: 10px;
   border-radius: 15px;
   width: 800px;
