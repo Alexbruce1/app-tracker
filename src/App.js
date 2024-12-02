@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
-import './App.css';
-
+import { useState, useEffect } from "react";
+import "./App.css";
+import "./JobList";
+import JobList from "./JobList";
 
 function App() {
   const [currentDate, setCurrentDate] = useState("");
@@ -16,14 +17,12 @@ function App() {
 
   return (
     <div className="App">
-      <div className="app-header-background"></div>
-      <div className="app-header-fade"></div>
       <div className="header">
         <h1>
           App-Tracker
         </h1>
       </div>
-      <div className="application-form-outline">
+      <div className="application-form-outline app-content">
         <form className="application-submit-form" onSubmit={saveJob}>
           <input 
             type="text" 
@@ -45,6 +44,12 @@ function App() {
             className="form-element form-submit" />
         </form>
       </div>
+
+      <JobList />
+
+      {/* background color gradient */}
+      <div className="app-header-background"></div>
+      <div className="app-header-fade"></div>
     </div>
   );
 }
