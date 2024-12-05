@@ -53,10 +53,18 @@
 }
 
 .form-submit {
-  background-color: #4158D0;
   border-radius: 8px;
   color: #fff;
   font-size: 16px;
   font-weight: 600;
   margin-left: 10px;
+}
+
+.button-element {
+  background-color: #4158D0;
+  cursor: pointer;
+}
+
+.button-element:hover {
+  background-color: #5671F5;
 }

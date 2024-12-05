@@ -11,7 +11,7 @@ function JobList() {
           placeholder="Search" />
         <input 
           type="button" 
-          className="job-search-submit"
+          className="job-search-submit button-element"
           value=">" />
       </div>
       Job List
