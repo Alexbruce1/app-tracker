@@ -5,7 +5,6 @@ import JobList from "./JobList";
 import { supabase } from './supabaseClient';
 
 function App() {
-  const [currentDate, setCurrentDate] = useState("");
   const [formData, setFormData] = useState({
     company: "",
     date: "",
@@ -15,7 +14,6 @@ function App() {
   
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
-    // setCurrentDate(today);
     setFormData(prev => ({
       ...prev,
       date: today
