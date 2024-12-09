@@ -7,7 +7,7 @@
 .job-search {
   width: 100%;
   box-sizing: border-box;
-  border-radius: 8px;
+  border-radius: 20px;
   margin: 0;
   margin-bottom: 10px;
   height: 40px;
@@ -35,9 +35,8 @@
   height: 100%;
   width: 60px;
   border: none;
-  border-radius: 8px;
+  border-radius: 14px;
   box-sizing: border-box;
   margin: 0;
-  background-color: #4158D0;
   color: #fff;
 }
