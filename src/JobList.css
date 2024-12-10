@@ -22,7 +22,10 @@
 
 .job-search-refresh {
   border: none;
-  border-radius: 50%;
+  border-radius: 16px;
+  /* width: 30px;
+  height: 30px; */
+  box-sizing: border-box;
 }
 
 .refresh-button-icon {
@@ -62,6 +65,8 @@
   filter: invert(70%);
   cursor: pointer;
   transition-duration: .3s;
+  height: 16px;
+  margin: auto;
 }
 
 .clear-text-icon:hover {

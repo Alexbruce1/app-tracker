@@ -89,7 +89,7 @@ function App() {
         <form className="application-submit-form" onSubmit={saveJob}>
           <input
             type="text"
-            placeholder="Company Applied To"
+            placeholder="Company"
             className="form-element company-field"
             autoComplete="off"
             name="company"
@@ -112,7 +112,7 @@ function App() {
             value={formData.jobBoard}
             onChange={handleChange}
           >
-            <option>Choose</option>
+            <option>Job Board</option>
             <option>LinkedIn</option>
             <option>GlassDoor</option>
             <option>BuiltIn</option>
@@ -122,7 +122,7 @@ function App() {
           </select>
           <input
             type="submit"
-            value="Save Job"
+            value="Save"
             className="form-element form-submit button-element"
           />
         </form>

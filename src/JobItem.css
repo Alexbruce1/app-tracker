@@ -19,3 +19,9 @@
 .job-item-applied-date {
   text-align: end;
 }
+
+@media (max-width: 860px) {
+  .job-item p {
+    width: 30%;
+  }
+}
