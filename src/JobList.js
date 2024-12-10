@@ -50,8 +50,6 @@ function JobList({ jobList, getJobList }) {
             )
           })
         )}
-
-        {/* <JobItem /> */}
       </div>
     </div>
   )

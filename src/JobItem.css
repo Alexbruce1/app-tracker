@@ -5,5 +5,17 @@
 }
 
 .job-item p {
-  /* width: 15%; */
+  width: 15%;
+}
+
+.job-item-company {
+  text-align: left;
+}
+
+.job-item-board {
+  text-align: center;
+}
+
+.job-item-applied-date {
+  text-align: end;
 }
