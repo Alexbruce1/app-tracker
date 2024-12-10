@@ -20,6 +20,19 @@
   justify-content: space-between;
 }
 
+.job-search-refresh {
+  border: none;
+  border-radius: 50%;
+}
+
+.refresh-button-icon {
+  transition: transform .3s ease-in-out;
+}
+
+.job-search-refresh:hover .refresh-button-icon {
+  transform: rotate(180deg);
+}
+
 .job-search-field {
   box-sizing: border-box;
   height: 100%;
@@ -39,4 +52,21 @@
   box-sizing: border-box;
   margin: 0;
   color: #fff;
+}
+
+.job-search-icon {
+  height: 20px;
+  filter: invert(100%);
+}
+
+.job-item-legend {
+  display: flex;
+  justify-content: space-between;
+  color: #aaa;
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.job-item-legend p {
+  /* width: 15%; */
 }

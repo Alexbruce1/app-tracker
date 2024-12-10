@@ -11,6 +11,7 @@ function App() {
     jobBoard: "",
     notes: ""
   });
+  const [jobList, setJobList] = useState([]);
 
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
@@ -18,8 +19,22 @@ function App() {
       ...prev,
       date: today
     }));
+
+    getJobList();
   }, []);
 
+  const getJobList = async () => {
+    const { data, error } = await supabase
+      .from('applications')
+      .select('*');
+    if (error) {
+      console.error('Error fetching applications:', error);
+      return [];
+    }
+    setJobList(data);
+    console.log(jobList);
+  };
+  
   const saveJob = async (e) => {
     e.preventDefault();
 
@@ -47,8 +62,8 @@ function App() {
           notes: "",
         });
       }
-    } catch (err) {
-      console.error('Unexpected error:', err);
+    } catch (error) {
+      console.error('Unexpected error:', error);
     }
   };
 
@@ -108,7 +123,7 @@ function App() {
         </form>
       </div>
 
-      <JobList />
+      <JobList jobList={jobList} getJobList={getJobList} />
 
       <div className="app-header-background"></div>
       <div className="app-header-fade"></div>
