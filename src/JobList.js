@@ -3,9 +3,21 @@ import "./JobList.css";
 import JobItem from "./JobItem";
 import search from "./assets/search.svg";
 import filter from "./assets/filter.svg";
+import clear from "./assets/clear.svg";
 import refresh from "./assets/refresh.svg";
 
 function JobList({ jobList, getJobList }) {
+  const [searchFieldText, setSearchFieldText] = useState("");
+
+  const handleTextInput = (e) => {
+    e.preventDefault();
+
+    setSearchFieldText(e.target.value);
+  }
+
+  const clearSearchField = () => {
+    setSearchFieldText("");
+  }
 
   return(
     <div className="app-content job-list">
@@ -16,12 +28,20 @@ function JobList({ jobList, getJobList }) {
         <input
           ype="text" 
           className="job-search-field" 
-          placeholder="Search" />
-        <button 
-          type="button" 
-          className="job-search-submit button-element">
-            <img src={search} className="job-search-icon filter-button-icon" />
+          placeholder="Search"
+          value={searchFieldText}
+          onChange={handleTextInput}/>
+        {searchFieldText && searchFieldText.length && (
+          <button className="job-search-clear-text">
+            <img 
+              className="job-search-icon clear-text-icon" 
+              src={clear}
+              onClick={clearSearchField}/>
           </button>
+        )}
+        <button className="job-search-submit button-element">
+          <img src={search} className="job-search-icon filter-button-icon" />
+        </button>
       </div>
       <div className="job-item-container">
         <div className="job-item-legend">

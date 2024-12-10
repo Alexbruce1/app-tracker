@@ -38,6 +38,11 @@
   animation: rotate-unhover 0.3s linear;
 }
 
+.job-search-icon {
+  height: 20px;
+  filter: invert(100%);
+}
+
 .job-search-field {
   box-sizing: border-box;
   height: 100%;
@@ -48,6 +53,21 @@
   margin: 0 10px;
 }
 
+.job-search-clear-text {
+  border: none;
+  background-color: transparent;
+}
+
+.clear-text-icon {
+  filter: invert(70%);
+  cursor: pointer;
+  transition-duration: .3s;
+}
+
+.clear-text-icon:hover {
+  filter: invert(50%);
+}
+
 .job-search-submit {
   height: 100%;
   width: 60px;
@@ -56,11 +76,6 @@
   box-sizing: border-box;
   margin: 0;
   color: #fff;
-}
-
-.job-search-icon {
-  height: 20px;
-  filter: invert(100%);
 }
 
 .job-item-legend {
