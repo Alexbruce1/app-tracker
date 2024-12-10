@@ -14,6 +14,11 @@ function App() {
   const [jobList, setJobList] = useState([]);
 
   useEffect(() => {
+    const isLocalhost = window.location.hostname === 'localhost';
+    document.title = isLocalhost ? 'App Tracker - local' : 'App Tracker';
+  }, []);  
+
+  useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
     setFormData((prev) => ({
       ...prev,
