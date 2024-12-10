@@ -1,0 +1,9 @@
+.job-item {
+  /* background-color: green; */
+  display: flex;
+  justify-content: space-between;
+}
+
+.job-item p {
+  /* width: 15%; */
+}
