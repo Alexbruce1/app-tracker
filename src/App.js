@@ -63,7 +63,6 @@ function App() {
         setFormData({
           company: "",
           date: new Date().toISOString().split("T")[0],
-          jobBoard: "",
           notes: "",
         });
       }
