@@ -130,7 +130,9 @@ function App() {
         </form>
       </div>
 
-      <JobList jobList={jobList} getJobList={getJobList} />
+      {jobList.length > 0 && (
+        <JobList jobList={jobList} getJobList={getJobList} />
+      )}
 
       <div className="app-header-background"></div>
       <div className="app-header-fade"></div>
