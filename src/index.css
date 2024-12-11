@@ -1,6 +1,7 @@
 :root {
   --background-off-white: #fcfcfc;
   --background-off-white-rgb: 252, 252, 252;
+  --main-text-color: #444
 }
 
 body {
