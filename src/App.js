@@ -14,6 +14,11 @@ function App() {
   const [jobList, setJobList] = useState([]);
 
   useEffect(() => {
+    const isLocalhost = window.location.hostname === 'localhost';
+    document.title = isLocalhost ? 'App Tracker - local' : 'App Tracker';
+  }, []);  
+
+  useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
     setFormData((prev) => ({
       ...prev,
@@ -58,13 +63,24 @@ function App() {
         setFormData({
           company: "",
           date: new Date().toISOString().split("T")[0],
-          jobBoard: "",
           notes: "",
         });
       }
     } catch (error) {
       console.error('Unexpected error:', error);
     }
+
+    getJobList();
+  };
+
+  const deleteApplication = async (id) => {
+    const { data, error } = await supabase.from('applications').delete().eq('id', id);
+    if (error) {
+      console.error('Error deleting application:', error);
+      return null;
+    }
+
+    getJobList();
   };
 
   const handleChange = (e) => {
@@ -84,7 +100,7 @@ function App() {
         <form className="application-submit-form" onSubmit={saveJob}>
           <input
             type="text"
-            placeholder="Company Applied To"
+            placeholder="Company"
             className="form-element company-field"
             autoComplete="off"
             name="company"
@@ -107,7 +123,7 @@ function App() {
             value={formData.jobBoard}
             onChange={handleChange}
           >
-            <option>Choose</option>
+            <option>Job Board</option>
             <option>LinkedIn</option>
             <option>GlassDoor</option>
             <option>BuiltIn</option>
@@ -117,13 +133,18 @@ function App() {
           </select>
           <input
             type="submit"
-            value="Save Job"
+            value="Save"
             className="form-element form-submit button-element"
           />
         </form>
       </div>
 
-      <JobList jobList={jobList} getJobList={getJobList} />
+      {jobList.length > 0 && (
+        <JobList 
+          jobList={jobList} 
+          getJobList={getJobList} 
+          deleteApplication={deleteApplication}/>
+      )}
 
       <div className="app-header-background"></div>
       <div className="app-header-fade"></div>

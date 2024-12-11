@@ -15,10 +15,15 @@
 
 .app-header-fade {
   height: 250px;
-  background-image: linear-gradient(transparent 1%, var(--background-off-white));
+  background-image: linear-gradient(
+    rgba(var(--background-off-white-rgb), 0) 10%,
+    rgba(var(--background-off-white-rgb), .1) 20%,
+    rgba(var(--background-off-white-rgb), 0.95) 80%,
+    rgba(var(--background-off-white-rgb), 0.97) 85%,
+    var(--background-off-white) 100%
+  );
   position: absolute;
   top: 50px;
-  height: 250px;
   width: 100%;
   z-index: -1;
 }
@@ -67,4 +72,47 @@
 
 .button-element:hover {
   background-color: #5671F5;
+}
+
+@media (max-width: 860px) {
+  .app-content {
+    width: 94%;
+  }
+}
+
+@media (max-width: 700px) {
+  .form-element {
+    padding: 5px 5px;
+  }
+
+  .job-board-field {
+    width: 120%;
+  }
+}
+
+@media (max-width: 620px) {
+  .application-submit-form {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .form-element {
+    margin: 5px;
+  }
+
+  .company-field {
+    width: 55%;
+  }
+
+  .date-applied-field {
+    width: 35%;
+  }
+
+  .job-board-field {
+    width: 30%;
+  }
+
+  .form-submit {
+    width: 50%;
+  }
 }
