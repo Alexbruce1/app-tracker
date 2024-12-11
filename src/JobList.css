@@ -10,7 +10,6 @@
   box-sizing: border-box;
   border-radius: 20px;
   margin: 0;
-  /* margin-bottom: 10px; */
   height: 40px;
   padding: 5px;
   border: none;
@@ -90,6 +89,16 @@
   color: #bbb;
   font-weight: 900;
   font-size: 14px;
+}
+
+.job-item-main-legend {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.job-item-delete-text {
+  padding-left: 10px;
 }
 
 /* ---------- KEYFRAMES ------------- */

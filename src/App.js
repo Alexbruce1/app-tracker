@@ -73,6 +73,16 @@ function App() {
     getJobList();
   };
 
+  const deleteApplication = async (id) => {
+    const { data, error } = await supabase.from('applications').delete().eq('id', id);
+    if (error) {
+      console.error('Error deleting application:', error);
+      return null;
+    }
+
+    getJobList();
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -130,7 +140,10 @@ function App() {
       </div>
 
       {jobList.length > 0 && (
-        <JobList jobList={jobList} getJobList={getJobList} />
+        <JobList 
+          jobList={jobList} 
+          getJobList={getJobList} 
+          deleteApplication={deleteApplication}/>
       )}
 
       <div className="app-header-background"></div>

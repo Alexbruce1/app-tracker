@@ -1,10 +1,15 @@
 .job-item {
-  /* background-color: green; */
   display: flex;
   justify-content: space-between;
   padding: 0 5px;
   line-height: .9;
-  /* margin: 5px; */
+  transition-duration: .3s;
+}
+
+.job-item-inner-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .job-item p {
@@ -21,6 +26,30 @@
 
 .job-item-applied-date {
   text-align: end;
+}
+
+.delete-item-button {
+  background-color: transparent;
+  border: none;
+  width: 40px;
+  cursor: pointer;
+  text-align: center;
+  margin-left: 10px;
+}
+
+.delete-record-icon {
+  height: 20px;
+  filter: invert(60%);
+  transition-duration: .3s;
+}
+
+.delete-record-icon:hover {
+  filter: invert(30%);
+}
+
+.hover-active-space {
+  width: 40px;
+  margin-left: 10px;
 }
 
 @media (max-width: 860px) {

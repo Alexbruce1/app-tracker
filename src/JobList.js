@@ -6,8 +6,9 @@ import filter from "./assets/filter.svg";
 import clear from "./assets/clear.svg";
 import refresh from "./assets/refresh.svg";
 
-function JobList({ jobList, getJobList }) {
+function JobList({ jobList, getJobList, deleteApplication }) {
   const [searchFieldText, setSearchFieldText] = useState("");
+  const [itemHover, setItemHover] = useState(false);
 
   const handleTextInput = (e) => {
     e.preventDefault();
@@ -45,9 +46,14 @@ function JobList({ jobList, getJobList }) {
       </div>
       <div className="job-item-container">
         <div className="job-item-legend">
-          <p>Company Name</p>
-          <p>Job Board</p>
-          <p>Date Applied</p>
+          <div className="job-item-main-legend">
+            <p>Company Name</p>
+            <p>Job Board</p>
+            <p>Date Applied</p>
+          </div>
+          {itemHover && (
+            <p className="job-item-delete-text">Delete</p>
+          )}
         </div>
           {jobList.map(item => {
             const formattedDate = item.applied_date 
@@ -65,7 +71,10 @@ function JobList({ jobList, getJobList }) {
                 jobBoard={item.job_board}
                 notes={item.notes}
                 createdAt={item.created_at}
-                appliedDate={formattedDate} />
+                appliedDate={formattedDate}
+                setItemHover={setItemHover}
+                itemHover={itemHover}
+                deleteApplication={deleteApplication} />
             )
           })
         }
