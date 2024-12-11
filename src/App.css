@@ -34,6 +34,7 @@
   width: 800px;
   margin: 25px auto;
   box-sizing: border-box;
+  color: var(--main-text-color);
 }
 
 .application-form-outline {

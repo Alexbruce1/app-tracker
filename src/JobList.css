@@ -1,5 +1,4 @@
 .job-list {
-  /* height: 500px; */
   background-color: #fff;
   box-shadow: 0 5px 10px -5px #ddd;
   border-radius: 25px;
@@ -24,6 +23,8 @@
   border: none;
   border-radius: 16px;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
 }
 
 .refresh-button-icon {
@@ -81,6 +82,10 @@
   box-sizing: border-box;
   margin: 0;
   color: #fff;
+}
+
+.job-item-container {
+  margin-bottom: 10px;
 }
 
 .job-item-legend {
