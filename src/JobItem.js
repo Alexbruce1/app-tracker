@@ -1,8 +1,8 @@
 import "./JobItem.css";
 
-function JobItem({ key, companyName, jobBoard, notes, createdAt, appliedDate }) {
+function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate }) {
   return (
-    <div className="job-item">
+    <div className="job-item" key={id}>
       <p className="job-item-company">{companyName}</p>
       <p className="job-item-board">{jobBoard}</p>
       <p className="job-item-applied-date">{appliedDate}</p>

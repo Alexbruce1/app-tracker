@@ -1,7 +1,8 @@
 .job-list {
-  height: 500px;
+  /* height: 500px; */
   background-color: #fff;
   box-shadow: 0 5px 10px -5px #ddd;
+  border-radius: 25px;
 }
 
 .job-search {
@@ -9,7 +10,7 @@
   box-sizing: border-box;
   border-radius: 20px;
   margin: 0;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   height: 40px;
   padding: 5px;
   border: none;
@@ -23,8 +24,6 @@
 .job-search-refresh {
   border: none;
   border-radius: 16px;
-  /* width: 30px;
-  height: 30px; */
   box-sizing: border-box;
 }
 
@@ -67,6 +66,8 @@
   transition-duration: .3s;
   height: 16px;
   margin: auto;
+  display: flex;
+  align-items: center;
 }
 
 .clear-text-icon:hover {

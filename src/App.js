@@ -70,6 +70,8 @@ function App() {
     } catch (error) {
       console.error('Unexpected error:', error);
     }
+
+    getJobList();
   };
 
   const handleChange = (e) => {

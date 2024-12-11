@@ -25,12 +25,14 @@ function JobList({ jobList, getJobList }) {
         <button className="button-element job-search-refresh" onClick={getJobList}>
           <img className="job-search-icon refresh-button-icon" src={refresh} />
         </button>
-        <input
-          ype="text" 
-          className="job-search-field" 
-          placeholder="Search"
-          value={searchFieldText}
-          onChange={handleTextInput}/>
+        {jobList.length > 0 && (
+          <input
+            ype="text" 
+            className="job-search-field" 
+            placeholder="Search"
+            value={searchFieldText}
+            onChange={handleTextInput}/>
+        )}
         {searchFieldText && searchFieldText.length && (
           <button className="job-search-clear-text">
             <img 
@@ -39,38 +41,41 @@ function JobList({ jobList, getJobList }) {
               onClick={clearSearchField}/>
           </button>
         )}
-        <button className="job-search-submit button-element">
-          <img src={search} className="job-search-icon filter-button-icon" />
-        </button>
-      </div>
-      <div className="job-item-container">
-        <div className="job-item-legend">
-          <p>Company Name</p>
-          <p>Job Board</p>
-          <p>Date Applied</p>
-        </div>
-        {jobList.length && (
-          jobList.map(item => {
-            const formattedDate = item.applied_date 
-              ? new Date(item.applied_date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "short",
-                day: "numeric"
-              })
-              : "N/A";
-      
-            return (
-              <JobItem 
-                key={item.id}
-                companyName={item.company_name}
-                jobBoard={item.job_board}
-                notes={item.notes}
-                createdAt={item.created_at}
-                appliedDate={formattedDate} />
-            )
-          })
+        {jobList.length > 0 && (
+          <button className="job-search-submit button-element">
+            <img src={search} className="job-search-icon filter-button-icon" />
+          </button>
         )}
       </div>
+      {jobList.length > 0 && (
+        <div className="job-item-container">
+          <div className="job-item-legend">
+            <p>Company Name</p>
+            <p>Job Board</p>
+            <p>Date Applied</p>
+          </div>
+            {jobList.map(item => {
+              const formattedDate = item.applied_date 
+                ? new Date(item.applied_date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric"
+                })
+                : "N/A";
+        
+              return (
+                <JobItem 
+                  id={item.id}
+                  companyName={item.company_name}
+                  jobBoard={item.job_board}
+                  notes={item.notes}
+                  createdAt={item.created_at}
+                  appliedDate={formattedDate} />
+              )
+            })
+          }
+        </div>
+      )}
     </div>
   )
 }
