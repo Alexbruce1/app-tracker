@@ -15,10 +15,15 @@
 
 .app-header-fade {
   height: 250px;
-  background-image: linear-gradient(transparent 1%, var(--background-off-white));
+  background-image: linear-gradient(
+    rgba(var(--background-off-white-rgb), 0) 10%,
+    rgba(var(--background-off-white-rgb), .1) 20%,
+    rgba(var(--background-off-white-rgb), 0.95) 80%,
+    rgba(var(--background-off-white-rgb), 0.97) 85%,
+    var(--background-off-white) 100%
+  );
   position: absolute;
   top: 50px;
-  height: 250px;
   width: 100%;
   z-index: -1;
 }
