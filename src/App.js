@@ -36,8 +36,12 @@ function App() {
       console.error('Error fetching applications:', error);
       return [];
     }
-    setJobList(data);
-    console.log(jobList);
+
+    const sortedData = data.sort((a, b) => {
+      return new Date(b.created_at) - new Date(a.created_at);
+    });
+
+    setJobList(sortedData);
   };
   
   const saveJob = async (e) => {
