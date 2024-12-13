@@ -69,6 +69,10 @@
 .button-element {
   background-color: #4158D0;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition-duration: .3s;
 }
 
 .button-element:hover {
