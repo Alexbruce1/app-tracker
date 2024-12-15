@@ -1,9 +1,33 @@
-.job-item {
+.job-item-top-row {
+  width: 100%;
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
-  padding: 0 5px;
+  padding: 0;
+  padding-right: 5px;
   line-height: .9;
   transition-duration: .3s;
+}
+
+.caret-container {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.job-item-caret {
+  filter: invert(10%);
+  height: 30px;
+  transition-duration: .3s;
+  cursor: pointer;
+}
+
+.job-item-caret:hover {
+  filter: invert(30%);
+}
+
+.job-item-caret-expanded {
+  transform: rotate(90deg);
 }
 
 .job-item-inner-container {
