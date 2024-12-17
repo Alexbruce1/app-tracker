@@ -75,6 +75,7 @@ function App() {
       console.error('Unexpected error:', error);
     }
 
+
     getJobList();
   };
 
@@ -94,6 +95,7 @@ function App() {
       ...prev,
       [name]: value
     }));
+    
   };
 
   return (

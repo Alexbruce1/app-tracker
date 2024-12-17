@@ -36,13 +36,14 @@
   width: 100%;
 }
 
-.job-item p {
-  width: 15%;
+.job-item-inner-container p {
+  width: 32%;
 }
 
 .job-item-company {
   text-align: left;
   font-weight: 800;
+  cursor: pointer;
 }
 
 .job-item-board {
@@ -53,19 +54,54 @@
   text-align: end;
 }
 
+.job-item-bottom-row-description-container,
+.job-item-bottom-row-field-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.job-item-bottom-row-field-container {
+  padding: 0 20px;
+}
+
+.job-item-bottom-row-field {
+  display: flex;
+  width: 30%;
+}
+
+.job-item-bottom-row-field p {
+  width: 50%;
+}
+
+.heard-back-text {
+  display: flex;
+}
+
+.status-dropdown {
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
 .delete-item-button {
   background-color: transparent;
   border: none;
-  width: 40px;
   cursor: pointer;
   text-align: center;
   margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.delete-item-text {
+  font-size: 16px;
 }
 
 .delete-record-icon {
   height: 20px;
   filter: invert(60%);
   transition-duration: .3s;
+  /* padding: 5px; */
 }
 
 .delete-record-icon:hover {
@@ -78,7 +114,7 @@
 }
 
 @media (max-width: 860px) {
-  .job-item p {
+  .job-item-inner-container p {
     width: 30%;
   }
 }
