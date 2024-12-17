@@ -3,15 +3,18 @@ import "./App.css";
 import "./JobList";
 import JobList from "./JobList";
 import { supabase } from "./supabaseClient";
+import caret from "./assets/caret.svg";
 
 function App() {
   const [formData, setFormData] = useState({
     company: "",
     date: "",
     jobBoard: "",
-    notes: ""
+    notes: "",
+    customCoverLetter: false,
   });
   const [jobList, setJobList] = useState([]);
+  const [FormExpanded, setFormExpanded] = useState(false);
 
   useEffect(() => {
     const isLocalhost = window.location.hostname === 'localhost';
@@ -56,6 +59,7 @@ function App() {
             applied_date: formData.date,
             job_board: formData.jobBoard,
             notes: formData.notes || "",
+            custom_cover_letter: false,
           },
         ])
         .select();
@@ -69,6 +73,7 @@ function App() {
           date: new Date().toISOString().split("T")[0],
           jobBoard: formData.jobBoard,
           notes: "",
+          customCoverLetter: false,
         });
       }
     } catch (error) {
@@ -97,6 +102,12 @@ function App() {
     }));
     
   };
+
+  const handleFormExpansion = () => {
+    setFormExpanded(!FormExpanded);
+
+    console.log(FormExpanded);
+  }
 
   return (
     <div className="App">
@@ -144,6 +155,9 @@ function App() {
             className="form-element form-submit button-element"
           />
         </form>
+        <button className="expand-form-button" onClick={handleFormExpansion}>
+          <img src={caret} className={FormExpanded ? "form-caret-img form-caret-img-expanded" : "form-caret-img"} />
+        </button>
       </div>
 
       {jobList.length > 0 && (

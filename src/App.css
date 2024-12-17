@@ -39,6 +39,37 @@
 
 .application-form-outline {
   background-color: #fff;
+  text-align: center;
+}
+
+.expand-form-button {
+  background-color: #FFF;
+  box-shadow: 0 0 3px -1px #CCC;
+  position: absolute;
+  border: none;
+  outline: none;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  margin: 0;
+  margin-top: -3px;
+  padding: 0;
+  transition-duration: .3s;
+  cursor: pointer;
+}
+
+.expand-form-button:hover {
+  box-shadow: 0 0 4px -1px #666;
+}
+
+.form-caret-img {
+  height: 24px;
+  transform: rotate(90deg);
+  filter: invert(30%);
+}
+
+.form-caret-img-expanded {
+  transform: rotate(270deg);
 }
 
 .application-submit-form {
