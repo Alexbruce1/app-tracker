@@ -3,15 +3,18 @@ import "./App.css";
 import "./JobList";
 import JobList from "./JobList";
 import { supabase } from "./supabaseClient";
+import caret from "./assets/caret.svg";
 
 function App() {
   const [formData, setFormData] = useState({
     company: "",
     date: "",
     jobBoard: "",
-    notes: ""
+    notes: "",
+    customCoverLetter: false,
   });
   const [jobList, setJobList] = useState([]);
+  const [FormExpanded, setFormExpanded] = useState(false);
 
   useEffect(() => {
     const isLocalhost = window.location.hostname === 'localhost';
@@ -56,6 +59,7 @@ function App() {
             applied_date: formData.date,
             job_board: formData.jobBoard,
             notes: formData.notes || "",
+            custom_cover_letter: formData.customCoverLetter,
           },
         ])
         .select();
@@ -69,6 +73,7 @@ function App() {
           date: new Date().toISOString().split("T")[0],
           jobBoard: formData.jobBoard,
           notes: "",
+          customCoverLetter: false,
         });
       }
     } catch (error) {
@@ -95,8 +100,18 @@ function App() {
       ...prev,
       [name]: value
     }));
-    
   };
+
+  const handleCheckboxChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      customCoverLetter: e.target.checked
+    }));
+  };
+
+  const handleFormExpansion = () => {
+    setFormExpanded(!FormExpanded);
+  }
 
   return (
     <div className="App">
@@ -105,45 +120,74 @@ function App() {
       </div>
       <div className="application-form-outline app-content">
         <form className="application-submit-form" onSubmit={saveJob}>
-          <input
-            type="text"
-            placeholder="Company"
-            className="form-element company-field"
-            autoComplete="off"
-            name="company"
-            value={formData.company}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="date"
-            placeholder="Date Applied"
-            className="form-element date-applied-field"
-            defaultValue={formData.date}
-            name="date"
-            onChange={handleChange}
-            required
-          />
-          <select
-            className="form-element job-board-field"
-            name="jobBoard"
-            value={formData.jobBoard}
-            onChange={handleChange}
-          >
-            <option>Job Board</option>
-            <option>LinkedIn</option>
-            <option>GlassDoor</option>
-            <option>BuiltIn</option>
-            <option>Indeed</option>
-            <option>Zip Recruiter</option>
-            <option>Other</option>
-          </select>
-          <input
-            type="submit"
-            value="Save"
-            className="form-element form-submit button-element"
-          />
+          <div className="application-submit-form-first-line">
+            <input
+              type="text"
+              placeholder="Company"
+              className="form-element company-field"
+              autoComplete="off"
+              name="company"
+              value={formData.company}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="date"
+              placeholder="Date Applied"
+              className="form-element date-applied-field"
+              defaultValue={formData.date}
+              name="date"
+              onChange={handleChange}
+              required
+            />
+            <select
+              className="form-element job-board-field"
+              name="jobBoard"
+              value={formData.jobBoard}
+              onChange={handleChange}
+            >
+              <option>Job Board</option>
+              <option>LinkedIn</option>
+              <option>GlassDoor</option>
+              <option>BuiltIn</option>
+              <option>Indeed</option>
+              <option>Zip Recruiter</option>
+              <option>Other</option>
+            </select>
+            <input
+              type="submit"
+              value="Save"
+              className="form-element form-submit button-element"
+            />
+          </div>
+
+          {FormExpanded && (
+            <div className="application-submit-form-second-line">
+              <div className="custom-letter-checkbox-container">
+                <label className="custom-letter-checkbox">
+                  <input 
+                    type="checkbox" 
+                    name="customCoverLetter"
+                    onChange={handleCheckboxChange}
+                    checked={formData.customCoverLetter}/>
+                  <span className="checkbox"></span>
+                </label>
+                <p className="custom-cover-letter-text">Custom Cover Letter</p>
+              </div>
+              <input 
+                type="text" 
+                placeholder="Notes"
+                name="notes"
+                value={formData.notes}
+                onChange={handleChange}
+                className="form-notes-field"/>
+            </div>
+          )}
+
         </form>
+        <button className="expand-form-button" onClick={handleFormExpansion}>
+          <img src={caret} className={FormExpanded ? "form-caret-img form-caret-img-expanded" : "form-caret-img"} />
+        </button>
       </div>
 
       {jobList.length > 0 && (
