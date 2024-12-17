@@ -100,7 +100,6 @@ function App() {
       ...prev,
       [name]: value
     }));
-
   };
 
   const handleCheckboxChange = (e) => {
@@ -175,6 +174,13 @@ function App() {
                 </label>
                 <p className="custom-cover-letter-text">Custom Cover Letter</p>
               </div>
+              <input 
+                type="text" 
+                placeholder="Notes"
+                name="notes"
+                value={formData.notes}
+                onChange={handleChange}
+                className="form-notes-field"/>
             </div>
           )}
 

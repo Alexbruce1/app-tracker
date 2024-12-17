@@ -47,6 +47,7 @@
   border-radius: 8px;
   display: flex;
   width: 100%;
+  justify-content: space-between;
 }
 
 .form-element {
@@ -100,7 +101,7 @@
 .checkbox {
   width: 16px;
   height: 16px;
-  border: 1px solid #DDD;
+  border: 2px solid #DDD;
   border-radius: 6px;
   margin-right: 4px;
   display: inline-block;
@@ -123,6 +124,22 @@
   border: solid white;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
+}
+
+.form-notes-field {
+  border: 2px solid #EEE;
+  border-radius: 10px;
+  padding: 16px 5px;
+  height: 20px;
+  margin: auto 0;
+  width: 60%;
+  outline: none;
+  transition-duration: .3s;
+  box-sizing: border-box;
+}
+
+.form-notes-field:focus {
+  border: 2px solid #CCC;
 }
 
 .expand-form-button {
