@@ -52,14 +52,24 @@ function JobList({ jobList, getJobList, deleteApplication }) {
           </div>
         </div>
           {jobList.map(item => {
-            const formattedDate = item.applied_date 
+            let formattedDate;
+
+            if (item.created_at.includes(item.applied_date)) {
+              formattedDate = new Date(item.created_at).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric"
+              });
+            } else {
+              formattedDate = item.applied_date 
               ? new Date(item.applied_date).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "short",
                 day: "numeric"
               })
               : "N/A";
-      
+            }
+            
             return (
               <JobItem 
                 id={item.id}
