@@ -48,7 +48,7 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
               <option>Offer</option>
               <option>Declined</option>
             </select>
-            <p>{notes ? `Notes: ${notes}` : "No notes"}</p>
+            <p className="job-item-notes">{notes ? `Notes: ${notes}` : "No notes"}</p>
             <button className="delete-item-button" onClick={handleDeletePress}>
               <img className="delete-record-icon" src={clear} />
             </button>
