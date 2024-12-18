@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import clear from "./assets/clear.svg";
 import caret from "./assets/caret.svg";
 import "./JobItem.css";
 
-function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, deleteApplication }) {
+function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, deleteApplication, updateApplication, heardBack }) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [newNotes, setNewNotes] = useState(notes);
+  const [updateHeardBack, setUpdateHeardBack] = useState(heardBack);
+
+  useEffect(() => {
+    setNewNotes(notes)
+  }, [notes])
 
   const handleExpansion = () => {
     setIsExpanded(!isExpanded)
@@ -16,6 +22,26 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
       deleteApplication(id);
     }
   }
+
+  const handleCheckboxChange = e => {
+    const checked = e.target.checked;
+    setUpdateHeardBack(checked);
+
+    handleHeardBackUpdate(e.target.name);
+  }
+
+  const updateNotes = e => {
+    setNewNotes(e.target.value)
+  }
+
+  const handleNotesUpdate = e => {
+    const [ name ] = e.target;
+    updateApplication(id, name, newNotes);
+  }
+
+  const handleHeardBackUpdate = name => {
+    updateApplication(id, name, !updateHeardBack);
+  };
 
   return (
     <div 
@@ -38,7 +64,16 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
         <div className="job-item-bottom-row">
           <div className="job-item-bottom-row-field-container">
             <div className="job-item-bottom-row-field heard-back">
-              <input type="checkbox" className="heard-back-text-checkbox"/>
+              <label className="custom-checkbox">
+                <input 
+                  type="checkbox" 
+                  name="heard_back"
+                  onChange={handleCheckboxChange}
+                  checked={updateHeardBack}
+                  />
+                <span className="checkbox"></span>
+              </label>
+
               <p className="heard-back-text">Heard back</p>
             </div>
             <select className="status-dropdown">
@@ -48,7 +83,18 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
               <option>Offer</option>
               <option>Declined</option>
             </select>
-            <p className="job-item-notes">{notes ? `Notes: ${notes}` : "No notes"}</p>
+            <div className="job-item-notes-container">
+              <input 
+                type="text" 
+                placeholder="Notes" 
+                className="job-item-notes" 
+                value={newNotes}
+                onChange={updateNotes}/>
+              <button 
+                className="job-item-notes-submit button-element" 
+                onClick={handleNotesUpdate}
+                name="notes">Update</button>
+            </div>
             <button className="delete-item-button" onClick={handleDeletePress}>
               <img className="delete-record-icon" src={clear} />
             </button>

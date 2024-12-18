@@ -6,7 +6,7 @@ import filter from "./assets/filter.svg";
 import clear from "./assets/clear.svg";
 import refresh from "./assets/refresh.svg";
 
-function JobList({ jobList, getJobList, deleteApplication }) {
+function JobList({ jobList, getJobList, deleteApplication, updateApplication }) {
   const [searchFieldText, setSearchFieldText] = useState("");
 
   const handleTextInput = (e) => {
@@ -78,7 +78,9 @@ function JobList({ jobList, getJobList, deleteApplication }) {
                 notes={item.notes}
                 createdAt={item.created_at}
                 appliedDate={formattedDate}
-                deleteApplication={deleteApplication} />
+                deleteApplication={deleteApplication} 
+                updateApplication={updateApplication}
+                heardBack={item.heard_back}/>
             )
           })
         }
