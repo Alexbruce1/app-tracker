@@ -23,12 +23,17 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
     }
   }
 
-  const handleCheckboxChange = e => {
-    const checked = e.target.checked;
-    setUpdateHeardBack(checked);
+  const handleUpdateHeardBack = e => {
+    e.stopPropagation();
+    const name = e.target.name;
 
-    handleHeardBackUpdate(e.target.name);
-  }
+    setUpdateHeardBack(prevState => {
+      const newState = !prevState;
+      updateApplication(id, name, newState);
+      return newState;
+    });
+
+  };
 
   const updateNotes = e => {
     setNewNotes(e.target.value)
@@ -38,10 +43,6 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
     const [ name ] = e.target;
     updateApplication(id, name, newNotes);
   }
-
-  const handleHeardBackUpdate = name => {
-    updateApplication(id, name, !updateHeardBack);
-  };
 
   return (
     <div 
@@ -68,7 +69,7 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
                 <input 
                   type="checkbox" 
                   name="heard_back"
-                  onChange={handleCheckboxChange}
+                  onChange={handleUpdateHeardBack}
                   checked={updateHeardBack}
                   />
                 <span className="checkbox"></span>
