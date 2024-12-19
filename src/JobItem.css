@@ -36,7 +36,8 @@
   width: 100%;
 }
 
-.job-item-inner-container p {
+.job-item-inner-container p,
+.job-item-inner-container select {
   width: 32%;
 }
 
@@ -47,6 +48,10 @@
 }
 
 .job-item-board {
+  text-align: center;
+}
+
+.job-item-status {
   text-align: center;
 }
 

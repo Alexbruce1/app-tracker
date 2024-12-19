@@ -48,6 +48,7 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication }) 
           <div className="job-item-main-legend">
             <p>Company Name</p>
             <p>Job Board</p>
+            <p>Status</p>
             <p>Date Applied</p>
           </div>
         </div>
@@ -80,6 +81,7 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication }) 
                 deleteApplication={deleteApplication} 
                 updateApplication={updateApplication}
                 heardBack={item.heard_back}
+                customLetter={item.custom_cover_letter}
                 applicationStatus={item.status}/>
             )
           })

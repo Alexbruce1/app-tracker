@@ -3,11 +3,12 @@ import clear from "./assets/clear.svg";
 import caret from "./assets/caret.svg";
 import "./JobItem.css";
 
-function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, deleteApplication, updateApplication, heardBack, applicationStatus }) {
+function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, deleteApplication, updateApplication, heardBack, customLetter, applicationStatus }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [newNotes, setNewNotes] = useState(notes);
   const [notesUpdated, setNotesUpdated] = useState(notes);
   const [updateHeardBack, setUpdateHeardBack] = useState(heardBack);
+  const [customCoverLetter, setCustomCoverLetter] = useState(customLetter);
   const [appStatus, setAppStatus] = useState(applicationStatus);
 
   const statusOptions = [
@@ -68,7 +69,15 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
       setTimeout(() => {
         setNotesUpdated(false);
       }, 2000);
-    };
+
+      // If custom_cover_letter is adjusted, update state and handle the DB update
+    } else if (name === "custom_cover_letter") {
+      setCustomCoverLetter(prevState => {
+        const newState = !prevState;
+        handleAppUpdate(id, name, newState);
+        return newState;
+      });
+    }
   };
 
   const handleAppUpdate = (id, name, value) => {
@@ -93,6 +102,20 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
         <div className="job-item-inner-container">
           <p className="job-item-company" onClick={handleExpansion}>{companyName}</p>
           <p className="job-item-board">{jobBoard}</p>
+          {isExpanded && (
+            <select 
+              className="status-dropdown job-item-status" 
+              onChange={handleFieldUpdates} 
+              name="status"
+              value={appStatus || "Application Status"}>
+                {statusOptions.map(option => {
+                  return <option key={option} value={option}>{option}</option>
+                })}
+            </select>
+          )}
+          {!isExpanded && (
+            <p className="job-item-status">{appStatus || "N/A"}</p>
+          )}
           <p className="job-item-applied-date">{appliedDate}</p>
         </div>
       </div>
@@ -112,15 +135,18 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
 
               <p className="heard-back-text">Heard back</p>
             </div>
-            <select 
-              className="status-dropdown" 
-              onChange={handleFieldUpdates} 
-              name="status"
-              value={appStatus || "Application Status"}>
-                {statusOptions.map(option => {
-                  return <option key={option} value={option}>{option}</option>
-                })}
-            </select>
+            <div className="job-item-bottom-row-field custom-cover-letter">
+              <label className="custom-checkbox">
+                <input 
+                  type="checkbox" 
+                  name="custom_cover_letter"
+                  onChange={handleFieldUpdates}
+                  checked={customCoverLetter}
+                  />
+                <span className="checkbox"></span>
+              </label>
+              <p className="heard-back-text">Custom Cover Letter</p>
+            </div>
             <div className="job-item-notes-container">
               <input 
                 type="text" 
