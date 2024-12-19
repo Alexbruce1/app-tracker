@@ -6,6 +6,7 @@ import "./JobItem.css";
 function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, deleteApplication, updateApplication, heardBack, applicationStatus }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [newNotes, setNewNotes] = useState(notes);
+  const [notesUpdated, setNotesUpdated] = useState(notes);
   const [updateHeardBack, setUpdateHeardBack] = useState(heardBack);
   const [appStatus, setAppStatus] = useState(applicationStatus);
 
@@ -63,6 +64,10 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
       // If notes are updated, handle the DB update
     } else if (name === "notes") {
       handleAppUpdate(id, "notes", newNotes);
+      setNotesUpdated(true);
+      setTimeout(() => {
+        setNotesUpdated(false);
+      }, 2000);
     };
   };
 
@@ -124,9 +129,9 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
                 value={newNotes}
                 onChange={updateNotes}/>
               <button 
-                className="job-item-notes-submit button-element" 
+                className={notesUpdated ? "job-item-notes-submit button-element job-item-notes-submit-updated" : "job-item-notes-submit button-element"} 
                 onClick={handleFieldUpdates}
-                name="notes">Update</button>
+                name={"notes"}>{notesUpdated ? "Saved" : "Update"}</button>
             </div>
             <button className="delete-item-button" onClick={handleDeletePress}>
               <img className="delete-record-icon" src={clear} />

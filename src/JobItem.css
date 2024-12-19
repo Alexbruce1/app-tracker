@@ -117,6 +117,14 @@
   border: none;
 }
 
+.job-item-notes-submit-updated {
+  background-color: var(--green);
+}
+
+.job-item-notes-submit-updated:hover {
+  background-color: var(--green);
+}
+
 .delete-item-button {
   background-color: transparent;
   border: none;
