@@ -69,7 +69,6 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication }) 
               })
               : "N/A";
             }
-            
             return (
               <JobItem 
                 id={item.id}
@@ -80,7 +79,8 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication }) 
                 appliedDate={formattedDate}
                 deleteApplication={deleteApplication} 
                 updateApplication={updateApplication}
-                heardBack={item.heard_back}/>
+                heardBack={item.heard_back}
+                applicationStatus={item.status}/>
             )
           })
         }

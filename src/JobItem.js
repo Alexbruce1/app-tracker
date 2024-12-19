@@ -3,14 +3,24 @@ import clear from "./assets/clear.svg";
 import caret from "./assets/caret.svg";
 import "./JobItem.css";
 
-function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, deleteApplication, updateApplication, heardBack }) {
+function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, deleteApplication, updateApplication, heardBack, applicationStatus }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [newNotes, setNewNotes] = useState(notes);
   const [updateHeardBack, setUpdateHeardBack] = useState(heardBack);
+  const [appStatus, setAppStatus] = useState(applicationStatus);
+
+  const statusOptions = [
+    "Application Status",
+    "Haven't heard back",
+    "Interviewing",
+    "Offer",
+    "Declined"
+  ];
 
   useEffect(() => {
-    setNewNotes(notes)
-  }, [notes])
+    setNewNotes(notes);
+    setAppStatus(applicationStatus);
+  }, [notes, applicationStatus]);
 
   const handleExpansion = () => {
     setIsExpanded(!isExpanded)
@@ -23,25 +33,45 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
     }
   }
 
-  const handleUpdateHeardBack = e => {
+  const handleFieldUpdates = e => {
     e.stopPropagation();
     const name = e.target.name;
+    const value = e.target.value;
 
-    setUpdateHeardBack(prevState => {
-      const newState = !prevState;
-      updateApplication(id, name, newState);
-      return newState;
-    });
+    if (name === "status") {
+      // If the user doesn't select "Application Status" or "Haven't heard back", set the updateHeardBack state to true
+      if (value !== statusOptions[0] & value !== statusOptions[1]) {
+        setUpdateHeardBack(true);
+        handleAppUpdate(id, "heard_back", updateHeardBack);
+      }
+      setAppStatus(value);
 
+      if (value === "Application Status") {
+        handleAppUpdate(id, name, "");
+      } else {
+        handleAppUpdate(id, name, value);
+      }
+
+      // If heard_back is adjusted, update state and handle the DB update
+    } else if (name === "heard_back") {
+      setUpdateHeardBack(prevState => {
+        const newState = !prevState;
+        handleAppUpdate(id, name, newState);
+        return newState;
+      });
+
+      // If notes are updated, handle the DB update
+    } else if (name === "notes") {
+      handleAppUpdate(id, "notes", newNotes);
+    };
+  };
+
+  const handleAppUpdate = (id, name, value) => {
+    updateApplication(id, name, value);
   };
 
   const updateNotes = e => {
     setNewNotes(e.target.value)
-  }
-
-  const handleNotesUpdate = e => {
-    const [ name ] = e.target;
-    updateApplication(id, name, newNotes);
   }
 
   return (
@@ -69,7 +99,7 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
                 <input 
                   type="checkbox" 
                   name="heard_back"
-                  onChange={handleUpdateHeardBack}
+                  onChange={handleFieldUpdates}
                   checked={updateHeardBack}
                   />
                 <span className="checkbox"></span>
@@ -77,12 +107,14 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
 
               <p className="heard-back-text">Heard back</p>
             </div>
-            <select className="status-dropdown">
-              <option>Application Status</option>
-              <option>Haven't heard back</option>
-              <option>Interviewing</option>
-              <option>Offer</option>
-              <option>Declined</option>
+            <select 
+              className="status-dropdown" 
+              onChange={handleFieldUpdates} 
+              name="status"
+              value={appStatus || "Application Status"}>
+                {statusOptions.map(option => {
+                  return <option key={option} value={option}>{option}</option>
+                })}
             </select>
             <div className="job-item-notes-container">
               <input 
@@ -93,7 +125,7 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
                 onChange={updateNotes}/>
               <button 
                 className="job-item-notes-submit button-element" 
-                onClick={handleNotesUpdate}
+                onClick={handleFieldUpdates}
                 name="notes">Update</button>
             </div>
             <button className="delete-item-button" onClick={handleDeletePress}>
