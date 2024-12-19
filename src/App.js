@@ -12,6 +12,7 @@ function App() {
     jobBoard: "",
     notes: "",
     customCoverLetter: false,
+    heardBack: false,
   });
   const [jobList, setJobList] = useState([]);
   const [FormExpanded, setFormExpanded] = useState(false);
@@ -43,7 +44,7 @@ function App() {
     const sortedData = data.sort((a, b) => {
       return new Date(b.created_at) - new Date(a.created_at);
     });
-
+    
     setJobList(sortedData);
   };
   
@@ -60,6 +61,7 @@ function App() {
             job_board: formData.jobBoard,
             notes: formData.notes || "",
             custom_cover_letter: formData.customCoverLetter,
+            heard_back: false,
           },
         ])
         .select();
@@ -74,12 +76,12 @@ function App() {
           jobBoard: formData.jobBoard,
           notes: "",
           customCoverLetter: false,
+          heardBack: false,
         });
       }
     } catch (error) {
       console.error('Unexpected error:', error);
     }
-
 
     getJobList();
   };
@@ -94,6 +96,20 @@ function App() {
     getJobList();
   };
 
+  const updateApplication = async (id, element, updates) => {
+    const { data, error } = await supabase
+      .from('applications')
+      .update({[element]: `${updates}`})
+      .eq('id', id);
+    if (error) {
+      console.error('Error updating application:', error);
+      return null;
+    }
+    return data;
+
+    getJobList();
+  };
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -164,7 +180,7 @@ function App() {
           {FormExpanded && (
             <div className="application-submit-form-second-line">
               <div className="custom-letter-checkbox-container">
-                <label className="custom-letter-checkbox">
+                <label className="custom-checkbox">
                   <input 
                     type="checkbox" 
                     name="customCoverLetter"
@@ -183,20 +199,18 @@ function App() {
                 className="form-notes-field"/>
             </div>
           )}
-
         </form>
         <button className="expand-form-button" onClick={handleFormExpansion}>
           <img src={caret} className={FormExpanded ? "form-caret-img form-caret-img-expanded" : "form-caret-img"} />
         </button>
       </div>
-
       {jobList.length > 0 && (
         <JobList 
           jobList={jobList} 
           getJobList={getJobList} 
-          deleteApplication={deleteApplication}/>
+          deleteApplication={deleteApplication}
+          updateApplication={updateApplication}/>
       )}
-
       <div className="app-header-background"></div>
       <div className="app-header-fade"></div>
     </div>

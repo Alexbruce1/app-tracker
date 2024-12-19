@@ -5,7 +5,7 @@
 }
 
 .app-header-background {
-  background-image: linear-gradient(300deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+  background-image: linear-gradient(300deg, var(--main-blue) 0%, #C850C0 46%, #FFCC70 100%);
   height: 300px;
   width: 100%;
   position: absolute;
@@ -74,16 +74,17 @@
 }
 
 .button-element {
-  background-color: #4158D0;
+  background-color: var(--main-blue);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition-duration: .3s;
+  color: white;
 }
 
 .button-element:hover {
-  background-color: #5671F5;
+  background-color: var(--accent-blue);
 }
 
 .custom-letter-checkbox-container {
@@ -91,14 +92,14 @@
   padding: 0 15px;
 }
 
-.custom-letter-checkbox {
+.custom-checkbox {
   display: flex;
   align-items: center;
   cursor: pointer;
   font-size: 16px;
 }
 
-.custom-letter-checkbox input {
+.custom-checkbox input {
   display: none;
 }
 
@@ -113,12 +114,12 @@
   transition: all 0.2s ease-in-out;
 }
 
-.custom-letter-checkbox input:checked + .checkbox {
-  background-color: #4158D0;
+.custom-checkbox input:checked + .checkbox {
+  background-color: var(--main-blue);
   border-color: transparent;
 }
 
-.custom-letter-checkbox input:checked + .checkbox::after {
+.custom-checkbox input:checked + .checkbox::after {
   content: "";
   position: absolute;
   top: 1px;

@@ -1,7 +1,10 @@
 :root {
   --background-off-white: #fcfcfc;
   --background-off-white-rgb: 252, 252, 252;
-  --main-text-color: #444
+  --main-text-color: #444;
+  --main-blue: #4158D0;
+  --accent-blue: #5671F5;
+  --green: #32CD32;
 }
 
 body {

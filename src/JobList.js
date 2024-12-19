@@ -6,7 +6,7 @@ import filter from "./assets/filter.svg";
 import clear from "./assets/clear.svg";
 import refresh from "./assets/refresh.svg";
 
-function JobList({ jobList, getJobList, deleteApplication }) {
+function JobList({ jobList, getJobList, deleteApplication, updateApplication }) {
   const [searchFieldText, setSearchFieldText] = useState("");
 
   const handleTextInput = (e) => {
@@ -48,6 +48,7 @@ function JobList({ jobList, getJobList, deleteApplication }) {
           <div className="job-item-main-legend">
             <p>Company Name</p>
             <p>Job Board</p>
+            <p>Status</p>
             <p>Date Applied</p>
           </div>
         </div>
@@ -69,7 +70,6 @@ function JobList({ jobList, getJobList, deleteApplication }) {
               })
               : "N/A";
             }
-            
             return (
               <JobItem 
                 id={item.id}
@@ -78,7 +78,11 @@ function JobList({ jobList, getJobList, deleteApplication }) {
                 notes={item.notes}
                 createdAt={item.created_at}
                 appliedDate={formattedDate}
-                deleteApplication={deleteApplication} />
+                deleteApplication={deleteApplication} 
+                updateApplication={updateApplication}
+                heardBack={item.heard_back}
+                customLetter={item.custom_cover_letter}
+                applicationStatus={item.status}/>
             )
           })
         }
