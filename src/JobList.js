@@ -8,6 +8,7 @@ import refresh from "./assets/refresh.svg";
 
 function JobList({ jobList, getJobList, deleteApplication, updateApplication }) {
   const [searchFieldText, setSearchFieldText] = useState("");
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   const handleTextInput = (e) => {
     e.preventDefault();
@@ -19,6 +20,10 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication }) 
     setSearchFieldText("");
   }
 
+  const toggleFiltersOpen = () => {
+    setFiltersOpen(!filtersOpen);
+  }
+
   return(
     <div className="app-content job-list">
       <div className="job-search">
@@ -28,7 +33,7 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication }) 
         <input
           ype="text" 
           className="job-search-field" 
-          placeholder="Search"
+          placeholder="Search for a Company"
           value={searchFieldText}
           onChange={handleTextInput}/>
         {searchFieldText && searchFieldText.length && (
@@ -39,6 +44,9 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication }) 
               onClick={clearSearchField}/>
           </button>
         )}
+        <button className="job-search-filter button-element" onClick={toggleFiltersOpen}>
+          <img src={filter} className="job-search-icon filter-button-icon" />
+        </button>
         <button className="job-search-submit button-element">
           <img src={search} className="job-search-icon filter-button-icon" />
         </button>
