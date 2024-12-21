@@ -26,32 +26,38 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication }) 
 
   return(
     <div className="app-content job-list">
-      <div className="job-search">
-        <button className="button-element job-search-refresh" onClick={getJobList}>
-          <img className="job-search-icon refresh-button-icon" src={refresh} />
-        </button>
-        <input
-          ype="text" 
-          className="job-search-field" 
-          placeholder="Search for a Company"
-          value={searchFieldText}
-          onChange={handleTextInput}/>
-        {searchFieldText && searchFieldText.length && (
-          <button className="job-search-clear-text">
-            <img 
-              className="job-search-icon clear-text-icon" 
-              src={clear}
-              onClick={clearSearchField}/>
+      <div className="job-search job-list-child">
+        <div className="job-search-top-row">
+          <button className="button-element job-search-refresh" onClick={getJobList}>
+            <img className="job-search-icon refresh-button-icon" src={refresh} />
           </button>
+          <input
+            ype="text" 
+            className="job-search-field" 
+            placeholder="Search for a Company"
+            value={searchFieldText}
+            onChange={handleTextInput}/>
+          {searchFieldText && searchFieldText.length && (
+            <button className="job-search-clear-text">
+              <img 
+                className="job-search-icon clear-text-icon" 
+                src={clear}
+                onClick={clearSearchField}/>
+            </button>
+          )}
+          <button className="job-search-filter button-element" onClick={toggleFiltersOpen}>
+            <img src={filter} className="job-search-icon filter-button-icon" />
+          </button>
+          <button className="job-search-submit button-element">
+            <img src={search} className="job-search-icon filter-button-icon" />
+          </button>
+        </div>
+        {filtersOpen && (
+          <div className="job-item-filter-list job-list-child">
+          </div>
         )}
-        <button className="job-search-filter button-element" onClick={toggleFiltersOpen}>
-          <img src={filter} className="job-search-icon filter-button-icon" />
-        </button>
-        <button className="job-search-submit button-element">
-          <img src={search} className="job-search-icon filter-button-icon" />
-        </button>
       </div>
-      <div className="job-item-container">
+      <div className="job-item-container job-list-child">
         <div className="job-item-legend">
           <div className="job-item-main-legend">
             <p>Company Name</p>
