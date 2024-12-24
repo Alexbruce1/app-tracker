@@ -31,8 +31,13 @@
 }
 
 .job-item-filter-list {
-  /* margin-top: 10px; */
-  padding: 5px;
+  padding: 10px 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.job-list-filter-text {
+  margin: 0 auto;
 }
 
 .job-search-refresh {
@@ -91,16 +96,6 @@
   filter: invert(50%);
 }
 
-.job-search-submit {
-  height: 100%;
-  width: 60px;
-  border: none;
-  border-radius: 14px;
-  box-sizing: border-box;
-  margin: 0;
-  color: #fff;
-}
-
 .job-search-filter {
   height: 100%;
   width: 60px;
@@ -109,6 +104,29 @@
   outline: none;
   padding: 0;
   margin: 0 8px;
+}
+
+.job-search-filter-open {
+  background-color: #fff;
+  border: 2px solid var(--main-blue);
+}
+
+.job-search-filter-open .filter-button-icon {
+  filter: invert(20%);
+}
+
+.job-search-filter-open:hover .filter-button-icon {
+  filter: invert(100%);
+}
+
+.job-search-submit {
+  height: 100%;
+  width: 60px;
+  border: none;
+  border-radius: 14px;
+  box-sizing: border-box;
+  margin: 0;
+  color: #fff;
 }
 
 .job-search-submit:hover .job-searach-icon {

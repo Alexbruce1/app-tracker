@@ -12,7 +12,6 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication }) 
 
   const handleTextInput = (e) => {
     e.preventDefault();
-
     setSearchFieldText(e.target.value);
   }
 
@@ -45,7 +44,9 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication }) 
                 onClick={clearSearchField}/>
             </button>
           )}
-          <button className="job-search-filter button-element" onClick={toggleFiltersOpen}>
+          <button 
+            className={filtersOpen ? "job-search-filter button-element job-search-filter-open" : "job-search-filter button-element"} 
+            onClick={toggleFiltersOpen}>
             <img src={filter} className="job-search-icon filter-button-icon" />
           </button>
           <button className="job-search-submit button-element">
@@ -54,6 +55,37 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication }) 
         </div>
         {filtersOpen && (
           <div className="job-item-filter-list job-list-child">
+            <label className="custom-checkbox">
+              <input 
+                type="checkbox" 
+                name="heard_back"
+                // onChange={handleFieldUpdates}
+                // checked={updateHeardBack}
+                />
+              <span className="checkbox"></span>
+              <p className="job-list-filter-text">Heard back</p>
+            </label>
+            <label className="custom-checkbox">
+              <input 
+                type="checkbox" 
+                name="custom_cover_letter"
+                // onChange={handleFieldUpdates}
+                // checked={updateHeardBack}
+                />
+              <span className="checkbox"></span>
+              <p className="job-list-filter-text">Custom Letter</p>
+            </label>
+            <label className="custom-checkbox">
+              <input 
+                type="checkbox" 
+                name="status"
+                // onChange={handleFieldUpdates}
+                // checked={updateHeardBack}
+                />
+              <span className="checkbox"></span>
+              <p className="job-list-filter-text">In Consideration</p>
+            </label>
+
           </div>
         )}
       </div>

@@ -149,7 +149,7 @@
 
 .expand-form-button {
   background-color: #FFF;
-  box-shadow: 0 0 3px -1px #CCC;
+  box-shadow: 0 0 3px 0px #666;
   position: absolute;
   border: none;
   outline: none;
@@ -157,7 +157,7 @@
   width: 24px;
   border-radius: 50%;
   margin: 0;
-  margin-top: -3px;
+  margin-top: -2px;
   padding: 0;
   transition-duration: .3s;
   cursor: pointer;
