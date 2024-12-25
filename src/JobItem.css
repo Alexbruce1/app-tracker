@@ -76,10 +76,11 @@
 }
 
 .job-item-bottom-row-field p {
-  width: 50%;
+  width: 100%;
 }
 
-.heard-back-text {
+.heard-back-text,
+.custom-letter-text {
   display: flex;
   align-items: center;
 }
@@ -93,7 +94,7 @@
 .job-item-notes-container {
   border: 1px solid #EEE;
   border-radius: 8px;
-  width: 30%;
+  width: 50%;
   max-height: 40px;
   margin: 0;
   padding: 5px;

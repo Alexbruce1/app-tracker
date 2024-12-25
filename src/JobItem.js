@@ -125,7 +125,7 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
       {isExpanded && (
         <div className="job-item-bottom-row">
           <div className="job-item-bottom-row-field-container">
-            <div className="job-item-bottom-row-field heard-back">
+            {/* <div className="job-item-bottom-row-field heard-back">
               <label className="custom-checkbox">
                 <input 
                   type="checkbox" 
@@ -136,7 +136,7 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
                 <span className="checkbox"></span>
               </label>
               <p className="heard-back-text">Heard back</p>
-            </div>
+            </div> */}
             <div className="job-item-bottom-row-field custom-cover-letter">
               <label className="custom-checkbox">
                 <input 
@@ -147,7 +147,7 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
                   />
                 <span className="checkbox"></span>
               </label>
-              <p className="heard-back-text">Custom Cover Letter</p>
+              <p className="custom-letter-text">Custom Cover Letter</p>
             </div>
             <div className="job-item-notes-container">
               <input 

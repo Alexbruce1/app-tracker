@@ -31,7 +31,8 @@
 }
 
 .job-item-filter-list {
-  padding: 10px 5px;
+  margin-top: 10px;
+  padding: 15px;
   display: flex;
   justify-content: space-between;
 }
@@ -127,10 +128,6 @@
   box-sizing: border-box;
   margin: 0;
   color: #fff;
-}
-
-.job-search-submit:hover .job-searach-icon {
-  
 }
 
 .job-item-container {
