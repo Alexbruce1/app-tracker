@@ -194,7 +194,7 @@
 }
 
 @media (max-width: 620px) {
-  .application-submit-form {
+  .application-submit-form-first-line {
     flex-wrap: wrap;
     justify-content: space-between;
   }
@@ -218,4 +218,12 @@
   .form-submit {
     width: 50%;
   }
+
+  .custom-cover-letter-text {
+    width: 100%;
+  }
+
+  .form-notes-field {
+    width: 55%;
+  } 
 }

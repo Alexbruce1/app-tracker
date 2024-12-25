@@ -45,6 +45,8 @@
   text-align: left;
   font-weight: 800;
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .job-item-board {
@@ -163,5 +165,10 @@
 @media (max-width: 860px) {
   .job-item-inner-container p {
     width: 30%;
+  }
+
+  .job-item-company {
+    width: 140px;
+    text-overflow: ellipsis;
   }
 }
