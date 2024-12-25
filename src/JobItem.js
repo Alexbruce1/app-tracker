@@ -40,10 +40,13 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
     const name = e.target.name;
     const value = e.target.value;
 
-    if (name === "status") {
+    if (name === "status") {      
       // If the user doesn't select "Application Status" or "Haven't heard back", set the updateHeardBack state to true
       if (value !== statusOptions[0] & value !== statusOptions[1]) {
         setUpdateHeardBack(true);
+        handleAppUpdate(id, "heard_back", updateHeardBack);
+      } else if (value === statusOptions[1]) {
+        setUpdateHeardBack(false);
         handleAppUpdate(id, "heard_back", updateHeardBack);
       }
       setAppStatus(value);
@@ -132,7 +135,6 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
                   />
                 <span className="checkbox"></span>
               </label>
-
               <p className="heard-back-text">Heard back</p>
             </div>
             <div className="job-item-bottom-row-field custom-cover-letter">
