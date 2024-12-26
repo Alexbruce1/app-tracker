@@ -176,7 +176,6 @@ function App() {
               className="form-element form-submit button-element"
             />
           </div>
-
           {FormExpanded && (
             <div className="application-submit-form-second-line">
               <div className="custom-letter-checkbox-container">
