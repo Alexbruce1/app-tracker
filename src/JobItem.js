@@ -117,7 +117,7 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
             </select>
           )}
           {!isExpanded && (
-            <p className="job-item-status">{appStatus || "N/A"}</p>
+            <p className="job-item-status">{appStatus || "-"}</p>
           )}
           <p className="job-item-applied-date">{appliedDate}</p>
         </div>
@@ -125,18 +125,6 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
       {isExpanded && (
         <div className="job-item-bottom-row">
           <div className="job-item-bottom-row-field-container">
-            {/* <div className="job-item-bottom-row-field heard-back">
-              <label className="custom-checkbox">
-                <input 
-                  type="checkbox" 
-                  name="heard_back"
-                  onChange={handleFieldUpdates}
-                  checked={updateHeardBack}
-                  />
-                <span className="checkbox"></span>
-              </label>
-              <p className="heard-back-text">Heard back</p>
-            </div> */}
             <div className="job-item-bottom-row-field custom-cover-letter">
               <label className="custom-checkbox">
                 <input 
