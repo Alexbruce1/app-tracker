@@ -117,7 +117,11 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
             </select>
           )}
           {!isExpanded && (
-            <p className="job-item-status">{appStatus || "-"}</p>
+            <p className="job-item-status">{
+              appStatus === statusOptions[0] ? "-" : 
+              appStatus === statusOptions[1] ? "-" : 
+              !appStatus ? "-" :
+              appStatus}</p>
           )}
           <p className="job-item-applied-date">{appliedDate}</p>
         </div>
