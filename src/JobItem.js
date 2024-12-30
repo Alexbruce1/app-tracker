@@ -3,21 +3,13 @@ import clear from "./assets/clear.svg";
 import caret from "./assets/caret.svg";
 import "./JobItem.css";
 
-function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, deleteApplication, updateApplication, heardBack, customLetter, applicationStatus }) {
+function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, deleteApplication, updateApplication, heardBack, customLetter, applicationStatus, applicationStatusOptions }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [newNotes, setNewNotes] = useState(notes);
   const [notesUpdated, setNotesUpdated] = useState(notes);
   const [updateHeardBack, setUpdateHeardBack] = useState(heardBack);
   const [customCoverLetter, setCustomCoverLetter] = useState(customLetter);
   const [appStatus, setAppStatus] = useState(applicationStatus);
-
-  const statusOptions = [
-    "Application Status",
-    "Haven't heard back",
-    "Interviewing",
-    "Offer",
-    "Declined"
-  ];
 
   useEffect(() => {
     setNewNotes(notes);
@@ -42,12 +34,12 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
 
     if (name === "status") {      
       // If the user doesn't select "Application Status" or "Haven't heard back", set the updateHeardBack state to true
-      if (value !== statusOptions[0] & value !== statusOptions[1]) {
+      if (value !== applicationStatusOptions[0] & value !== applicationStatusOptions[1]) {
         setUpdateHeardBack(true);
-        handleAppUpdate(id, "heard_back", updateHeardBack);
-      } else if (value === statusOptions[1]) {
+        handleAppUpdate(id, "heard_back", true);
+      } else if (value === applicationStatusOptions[1]) {
         setUpdateHeardBack(false);
-        handleAppUpdate(id, "heard_back", updateHeardBack);
+        handleAppUpdate(id, "heard_back", false);
       }
       setAppStatus(value);
 
@@ -111,15 +103,15 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
               onChange={handleFieldUpdates} 
               name="status"
               value={appStatus || "Application Status"}>
-                {statusOptions.map(option => {
+                {applicationStatusOptions.map(option => {
                   return <option key={option} value={option}>{option}</option>
                 })}
             </select>
           )}
           {!isExpanded && (
             <p className="job-item-status">{
-              appStatus === statusOptions[0] ? "-" : 
-              appStatus === statusOptions[1] ? "-" : 
+              appStatus === applicationStatusOptions[0] ? "-" : 
+              appStatus === applicationStatusOptions[1] ? "-" : 
               !appStatus ? "-" :
               appStatus}</p>
           )}

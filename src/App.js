@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import "./JobList";
+import Stats from "./Stats";
 import JobList from "./JobList";
 import { supabase } from "./supabaseClient";
 import caret from "./assets/caret.svg";
@@ -14,6 +14,15 @@ function App() {
     customCoverLetter: false,
     heardBack: false,
   });
+
+  const applicationStatusOptions = [
+    "Application Status",
+    "Haven't heard back",
+    "Potentially Interviewing",
+    "Interviewing",
+    "Offer",
+    "Declined"
+  ];
   const [jobList, setJobList] = useState([]);
   const [FormExpanded, setFormExpanded] = useState(false);
 
@@ -205,11 +214,13 @@ function App() {
       </div>
       {jobList.length > 0 && (
         <JobList 
-          jobList={jobList} 
-          getJobList={getJobList} 
-          deleteApplication={deleteApplication}
-          updateApplication={updateApplication}/>
+        jobList={jobList} 
+        getJobList={getJobList} 
+        deleteApplication={deleteApplication}
+        updateApplication={updateApplication}
+        applicationStatusOptions={applicationStatusOptions}/>
       )}
+      <Stats jobList={jobList}/>
       <div className="app-header-background"></div>
       <div className="app-header-fade"></div>
     </div>
