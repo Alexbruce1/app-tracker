@@ -142,8 +142,13 @@
   width: 100%;
 }
 
-.job-item-delete-text {
-  padding-left: 10px;
+.week-divider {
+  margin: 0;
+  line-height: 1;
+  font-size: 14px;
+  /* padding-left: 25px; */
+  font-weight: 900;
+  color: #999;
 }
 
 /* ---------- KEYFRAMES ------------- */
