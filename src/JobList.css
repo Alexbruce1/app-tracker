@@ -146,9 +146,47 @@
   margin: 0;
   line-height: 1;
   font-size: 14px;
-  /* padding-left: 25px; */
   font-weight: 900;
   color: #999;
+}
+
+.job-list-page-controls {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.job-list-page-control-button {
+  border: 2px solid #eee;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  font-weight: 600;
+  color: #999;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0 8px;
+}
+
+.job-list-page-control-button-hidden {
+  visibility: hidden;
+}
+
+.job-list-page-control-button:hover {
+  background-color: #eee;
+  color: #555;
+}
+
+.job-list-page-control-caret {
+  height: 24px;
+  filter: invert(50%);
+}
+
+.caret-left {
+  rotate: 180deg;
 }
 
 /* ---------- KEYFRAMES ------------- */
