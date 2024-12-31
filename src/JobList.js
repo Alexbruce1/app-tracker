@@ -6,7 +6,7 @@ import filter from "./assets/filter.svg";
 import clear from "./assets/clear.svg";
 import refresh from "./assets/refresh.svg";
 
-function JobList({ jobList, getJobList, deleteApplication, updateApplication }) {
+function JobList({ jobList, getJobList, deleteApplication, updateApplication, applicationStatusOptions }) {
   const [searchFieldText, setSearchFieldText] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
 
@@ -24,7 +24,7 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication }) 
   }
 
   return(
-    <div className="app-content job-list">
+    <div className="app-content body-app-content">
       <div className="job-search job-list-child">
         <div className="job-search-top-row">
           <button className="button-element job-search-refresh" onClick={getJobList}>
@@ -128,7 +128,8 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication }) 
                 updateApplication={updateApplication}
                 heardBack={item.heard_back}
                 customLetter={item.custom_cover_letter}
-                applicationStatus={item.status}/>
+                applicationStatus={item.status}
+                applicationStatusOptions={applicationStatusOptions}/>
             )
           })
         }

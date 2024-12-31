@@ -46,7 +46,9 @@
   font-weight: 800;
   cursor: pointer;
   white-space: nowrap;
-  overflow: hidden;
+  height: 16px;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 }
 
 .job-item-board {
@@ -169,6 +171,5 @@
 
   .job-item-company {
     width: 140px;
-    text-overflow: ellipsis;
   }
 }
