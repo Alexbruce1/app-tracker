@@ -171,6 +171,10 @@
   margin: 0 8px;
 }
 
+.job-list-page-control-button-hidden {
+  visibility: hidden;
+}
+
 .job-list-page-control-button:hover {
   background-color: #eee;
   color: #555;

@@ -117,21 +117,25 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication, ap
       </div>
       {resultsLength > resultsShown && (
         <div className="job-list-page-controls">
-          {resultsPage > 1 && (
-            <div className="job-list-page-control-button" onClick={() => setResultsPage(resultsPage - 1)}>
-              <img src={caret} className="job-list-page-control-caret caret-left" />
-            </div>
-          )}
+          <div 
+            className={resultsPage > 1 ? "job-list-page-control-button" : "job-list-page-control-button-hidden job-list-page-control-button"} 
+            onClick={() => setResultsPage(resultsPage - 1)}>
+            <img 
+              src={caret} 
+              className="job-list-page-control-caret caret-left"/>
+          </div>
           <div className="job-list-page-control-button">{resultsPage}</div>
-          {resultsLength > resultsShown && (
-            <div className="job-list-page-control-button" onClick={() => setResultsPage(resultsPage + 1)}>
-              <img src={caret} className="job-list-page-control-caret" />
-            </div>
-          )}
+          <div 
+            className={resultsLength > resultsShown ? "job-list-page-control-button" : "job-list-page-control-button-hidden job-list-page-control-button"} 
+            onClick={() => setResultsPage(resultsPage + 1)}>
+            <img 
+              src={caret} 
+              className="job-list-page-control-caret"/>
+          </div>
         </div>
       )}
     </div>
   );
-}
+};
 
 export default JobList;
