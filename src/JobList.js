@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./JobList.css";
+import caret from "./assets/caret.svg";
 import JobItem from "./JobItem";
 import search from "./assets/search.svg";
 import filter from "./assets/filter.svg";
@@ -9,6 +10,9 @@ import refresh from "./assets/refresh.svg";
 function JobList({ jobList, getJobList, deleteApplication, updateApplication, applicationStatusOptions }) {
   const [searchFieldText, setSearchFieldText] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [resultsPage, setResultsPage] = useState(1);
+  const [resultsLength, setResultsLength] = useState(jobList.length);
+  const [resultsShown, setResultsShown] = useState(10);
 
   const groupedJobs = jobList.reduce((weeks, job) => {
     const appliedDate = new Date(job.applied_date || job.created_at);
@@ -111,6 +115,21 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication, ap
           </div>
         ))}
       </div>
+      {resultsLength > resultsShown && (
+        <div className="job-list-page-controls">
+          {resultsPage > 1 && (
+            <div className="job-list-page-control-button" onClick={() => setResultsPage(resultsPage - 1)}>
+              <img src={caret} className="job-list-page-control-caret caret-left" />
+            </div>
+          )}
+          <div className="job-list-page-control-button">{resultsPage}</div>
+          {resultsLength > resultsShown && (
+            <div className="job-list-page-control-button" onClick={() => setResultsPage(resultsPage + 1)}>
+              <img src={caret} className="job-list-page-control-caret" />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

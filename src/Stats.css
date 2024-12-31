@@ -3,13 +3,6 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 20px;
-
-  /* The following code turns the section into a footer instead of an app-content box  */
-  /* padding: 20px 40px;
-  width: 100%;
-  border-radius: 0;
-  justify-content: flex-start;
-  box-sizing: border-box; */
 }
 
 .stats-title {
