@@ -11,20 +11,32 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication, ap
   const [searchFieldText, setSearchFieldText] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [resultsPage, setResultsPage] = useState(1);
-  const [resultsLength, setResultsLength] = useState(jobList.length);
-  const [resultsShown, setResultsShown] = useState(10);
+  const [resultsShown] = useState(10);
 
-  const groupedJobs = jobList.reduce((weeks, job) => {
+  // Categorize jobs into "This Week" and "Previous"
+  const now = new Date();
+  const startOfWeek = new Date(now);
+  startOfWeek.setDate(now.getDate() - now.getDay()); // Start of the current week (Sunday)
+
+  const thisWeekJobs = jobList.filter((job) => {
     const appliedDate = new Date(job.applied_date || job.created_at);
-    const weekStart = new Date(appliedDate);
-    weekStart.setDate(weekStart.getDate() - weekStart.getDay());
-    const weekKey = weekStart.toISOString().slice(0, 10);
+    return appliedDate >= startOfWeek;
+  });
 
-    if (!weeks[weekKey]) weeks[weekKey] = [];
-    weeks[weekKey].push(job);
+  const previousJobs = jobList.filter((job) => {
+    const appliedDate = new Date(job.applied_date || job.created_at);
+    return appliedDate < startOfWeek;
+  });
 
-    return weeks;
-  }, {});
+  // Conditionally include "This Week" section only if there are jobs
+  const categorizedJobs = [
+    ...(thisWeekJobs.length > 0 ? [{ isDivider: true, label: "This Week", jobs: thisWeekJobs }] : []),
+    { isDivider: true, label: "Previous Weeks", jobs: previousJobs },
+  ].flatMap((category) => [category, ...category.jobs]);
+
+  const startIndex = (resultsPage - 1) * resultsShown;
+  const endIndex = startIndex + resultsShown;
+  const paginatedJobs = categorizedJobs.slice(startIndex, endIndex);
 
   const handleTextInput = (e) => {
     e.preventDefault();
@@ -39,6 +51,8 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication, ap
     setFiltersOpen(!filtersOpen);
   };
 
+  const totalPages = Math.ceil(categorizedJobs.length / resultsShown);
+
   return (
     <div className="app-content body-app-content">
       <div className="job-search job-list-child">
@@ -47,8 +61,8 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication, ap
             <img className="job-search-icon refresh-button-icon" src={refresh} />
           </button>
           <input
-            type="text" 
-            className="job-search-field" 
+            type="text"
+            className="job-search-field"
             placeholder="Search for a Company"
             value={searchFieldText}
             onChange={handleTextInput}
@@ -58,8 +72,8 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication, ap
               <img className="job-search-icon clear-text-icon" src={clear} />
             </button>
           )}
-          <button 
-            className={filtersOpen ? "job-search-filter button-element job-search-filter-open" : "job-search-filter button-element"} 
+          <button
+            className={filtersOpen ? "job-search-filter button-element job-search-filter-open" : "job-search-filter button-element"}
             onClick={toggleFiltersOpen}>
             <img src={filter} className="job-search-icon filter-button-icon" />
           </button>
@@ -74,60 +88,61 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication, ap
         )}
       </div>
       <div className="job-item-container job-list-child">
-      <div className="job-item-main-legend">
-        <p>Company Name</p>
-        <p>Job Board</p>
-        <p>Status</p>
-        <p>Date Applied</p>
-      </div>
-        {Object.entries(groupedJobs).map(([weekStart, jobs]) => (
-          <div key={weekStart} className="week-section">
-            <p className="week-divider">{weekStart}</p>
-            <div className="job-item-legend">
-            </div>
-            {jobs.map((item) => {
-              const formattedDate = item.applied_date 
-                ? new Date(item.applied_date).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric"
-                  })
-                : "N/A";
+        <div className="job-item-main-legend">
+          <p>Company Name</p>
+          <p>Job Board</p>
+          <p>Status</p>
+          <p>Date Applied</p>
+        </div>
+        {paginatedJobs.map((item, index) => {
+          if (item.isDivider) {
+            return (
+              <div key={`divider-${item.label}-${index}`} className="week-section">
+                <h3 className="week-divider">{item.label}</h3>
+              </div>
+            );
+          }
 
-              return (
-                <JobItem 
-                  key={item.id}
-                  id={item.id}
-                  companyName={item.company_name}
-                  jobBoard={item.job_board}
-                  notes={item.notes}
-                  createdAt={item.created_at}
-                  appliedDate={formattedDate}
-                  deleteApplication={deleteApplication} 
-                  updateApplication={updateApplication}
-                  heardBack={item.heard_back}
-                  customLetter={item.custom_cover_letter}
-                  applicationStatus={item.status}
-                  applicationStatusOptions={applicationStatusOptions}
-                />
-              );
-            })}
-          </div>
-        ))}
+          const formattedDate = item.applied_date
+            ? new Date(item.applied_date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })
+            : "N/A";
+
+          return (
+            <JobItem
+              key={item.id}
+              id={item.id}
+              companyName={item.company_name}
+              jobBoard={item.job_board}
+              notes={item.notes}
+              createdAt={item.created_at}
+              appliedDate={formattedDate}
+              deleteApplication={deleteApplication}
+              updateApplication={updateApplication}
+              heardBack={item.heard_back}
+              customLetter={item.custom_cover_letter}
+              applicationStatus={item.status}
+              applicationStatusOptions={applicationStatusOptions}
+            />
+          );
+        })}
       </div>
-      {resultsLength > resultsShown && (
+      {totalPages > 1 && (
         <div className="job-list-page-controls">
           <div 
             className={resultsPage > 1 ? "job-list-page-control-button" : "job-list-page-control-button-hidden job-list-page-control-button"} 
-            onClick={() => setResultsPage(resultsPage - 1)}>
+            onClick={() => setResultsPage((prev) => Math.max(prev - 1, 1))}>
             <img 
               src={caret} 
               className="job-list-page-control-caret caret-left"/>
           </div>
           <div className="job-list-page-control-button">{resultsPage}</div>
           <div 
-            className={resultsLength > resultsShown ? "job-list-page-control-button" : "job-list-page-control-button-hidden job-list-page-control-button"} 
-            onClick={() => setResultsPage(resultsPage + 1)}>
+            className={resultsPage < totalPages ? "job-list-page-control-button" : "job-list-page-control-button-hidden job-list-page-control-button"} 
+            onClick={() => setResultsPage((prev) => Math.min(prev + 1, totalPages))}>
             <img 
               src={caret} 
               className="job-list-page-control-caret"/>
@@ -136,6 +151,6 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication, ap
       )}
     </div>
   );
-};
+}
 
 export default JobList;
