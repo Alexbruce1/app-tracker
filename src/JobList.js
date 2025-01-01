@@ -13,10 +13,9 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication, ap
   const [resultsPage, setResultsPage] = useState(1);
   const [resultsShown] = useState(10);
 
-  // Categorize jobs into "This Week" and "Previous"
   const now = new Date();
   const startOfWeek = new Date(now);
-  startOfWeek.setDate(now.getDate() - now.getDay()); // Start of the current week (Sunday)
+  startOfWeek.setDate(now.getDate() - now.getDay());
 
   const thisWeekJobs = jobList.filter((job) => {
     const appliedDate = new Date(job.applied_date || job.created_at);
@@ -28,7 +27,6 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication, ap
     return appliedDate < startOfWeek;
   });
 
-  // Conditionally include "This Week" section only if there are jobs
   const categorizedJobs = [
     ...(thisWeekJobs.length > 0 ? [{ isDivider: true, label: "This Week", jobs: thisWeekJobs }] : []),
     { isDivider: true, label: "Previous Weeks", jobs: previousJobs },
