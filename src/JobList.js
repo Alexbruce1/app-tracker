@@ -7,7 +7,7 @@ import filter from "./assets/filter.svg";
 import clear from "./assets/clear.svg";
 import refresh from "./assets/refresh.svg";
 
-function JobList({ jobList, getJobList, deleteApplication, updateApplication, applicationStatusOptions }) {
+function JobList({ jobList, getJobList, deleteApplication, updateApplication, filterResultsByCompanyName, applicationStatusOptions }) {
   const [searchFieldText, setSearchFieldText] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [resultsPage, setResultsPage] = useState(1);
@@ -39,6 +39,8 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication, ap
   const handleTextInput = (e) => {
     e.preventDefault();
     setSearchFieldText(e.target.value);
+
+    filterResultsByCompanyName(e.target.value);
   };
 
   const clearSearchField = () => {
