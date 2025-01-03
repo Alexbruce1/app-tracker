@@ -27,8 +27,8 @@ function App() {
   const [FormExpanded, setFormExpanded] = useState(false);
 
   useEffect(() => {
-    const isLocalhost = window.location.hostname === 'localhost';
-    document.title = isLocalhost ? 'App Tracker - local' : 'App Tracker';
+    const isLocalhost = window.location.hostname === "localhost";
+    document.title = isLocalhost ? "App Tracker - local" : "App Tracker";
   }, []);  
 
   useEffect(() => {
@@ -43,10 +43,10 @@ function App() {
 
   const getJobList = async () => {
     const { data, error } = await supabase
-      .from('applications')
-      .select('*');
+      .from("applications")
+      .select("*");
     if (error) {
-      console.error('Error fetching applications:', error);
+      console.error("Error fetching applications:", error);
       return [];
     }
 
@@ -62,7 +62,7 @@ function App() {
 
     try {
       const { data, error } = await supabase
-        .from('applications')
+        .from("applications")
         .insert([
           {
             company_name: formData.company,
@@ -76,8 +76,8 @@ function App() {
         .select();
 
       if (error) {
-        console.error('Error adding application:', error);
-        alert('Failed to save job application. Please try again.');
+        console.error("Error adding application:", error);
+        alert("Failed to save job application. Please try again.");
       } else {
         setFormData({
           company: "",
@@ -89,29 +89,41 @@ function App() {
         });
       }
     } catch (error) {
-      console.error('Unexpected error:', error);
+      console.error("Unexpected error:", error);
     }
 
     getJobList();
   };
 
   const deleteApplication = async (id) => {
-    const { data, error } = await supabase.from('applications').delete().eq('id', id);
+    const { data, error } = await supabase.from("applications").delete().eq("id", id);
     if (error) {
-      console.error('Error deleting application:', error);
+      console.error("Error deleting application:", error);
       return null;
     }
 
     getJobList();
   };
 
+  const filterResultsByCompanyName = async (query) => {
+
+    let { data, error } = await supabase
+      .from("applications")
+      .select("*")
+      .gt("company_name", query)
+      // .ilike("company_name", "%CaseInsensitive%")  
+      
+    console.log(query, data)
+    setJobList(data);
+  }
+
   const updateApplication = async (id, element, updates) => {
     const { data, error } = await supabase
-      .from('applications')
+      .from("applications")
       .update({[element]: `${updates}`})
-      .eq('id', id);
+      .eq("id", id);
     if (error) {
-      console.error('Error updating application:', error);
+      console.error("Error updating application:", error);
       return null;
     }
     return data;
@@ -218,6 +230,7 @@ function App() {
         getJobList={getJobList} 
         deleteApplication={deleteApplication}
         updateApplication={updateApplication}
+        filterResultsByCompanyName={filterResultsByCompanyName}
         applicationStatusOptions={applicationStatusOptions}/>
       )}
       <Stats jobList={jobList}/>
