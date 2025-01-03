@@ -113,7 +113,6 @@ function App() {
       .gt("company_name", query)
       // .ilike("company_name", "%CaseInsensitive%")  
       
-    console.log(query, data)
     setJobList(data);
   }
 
