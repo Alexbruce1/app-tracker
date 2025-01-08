@@ -1,8 +1,8 @@
 .stats-section {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   gap: 20px;
+  padding-bottom: 20px;
 }
 
 .stats-title {
@@ -10,15 +10,56 @@
   margin: 0 8px;
 }
 
+.stats-progress-bar {
+  background-color: var(--background-off-white);
+  width: 100%;
+  height: 20px;
+  margin: 0 8px;
+  border-radius: 5px;
+  border: 2px solid #ddd;
+  padding: 0;
+  display: flex;
+}
+
+.stats-progress-bar-havent-heard-back {
+  background-color: var(--havent-heard-back);
+  height: 100%;
+  margin: 0;
+  border: none;
+  padding: 0 10px;
+  font-weight: 700;
+  color: #fff;
+  font-size: 12px;
+  box-sizing: border-box;
+  border-radius: 3px 0 0 3px;
+  display: flex;
+  align-items: center;
+}
+
+.stats-progress-bar-declined {
+  background-color: var(--declined);
+  height: 100%;
+  margin: 0;
+  border: none;
+  box-sizing: border-box;
+  border-radius: 0 3px 3px 0;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  font-size: 12px;
+  align-items: center;
+  padding: 0 2px;
+}
+
 .stat-container {
   border-radius: 15px;
   box-shadow: 0 5px 10px -3px #ddd;
   box-sizing: border-box;
   margin: 0 8px;
-  max-width: 200px;
   padding: 15px;
   text-align: center;
-  width: 33%;
+  width: 29%;
+  box-sizing: border-box;
 }
 
 .stat-title {
@@ -31,4 +72,20 @@
   font-weight: 800;
   width: 100%;
   margin: 0;
+}
+
+.color-indicator {
+  display: inline-block;
+  margin: 0 5px;
+  border-radius: 8px;
+  color: #fff;
+  padding: 0 8px;
+}
+
+.color-indicator-havent-heard-back {
+  background-color: var(--havent-heard-back);
+}
+
+.color-indicator-declined {
+  background-color: var(--declined);
 }
