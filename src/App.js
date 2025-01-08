@@ -51,7 +51,7 @@ function App() {
     }
 
     const sortedData = data.sort((a, b) => {
-      return new Date(b.created_at) - new Date(a.created_at);
+      return new Date(b.applied_date) - new Date(a.applied_date);
     });
     
     setJobList(sortedData);
