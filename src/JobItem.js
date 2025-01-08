@@ -77,6 +77,10 @@ function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, del
 
   const handleAppUpdate = (id, name, value) => {
     updateApplication(id, name, value);
+
+    if (name === "status") {
+      setIsExpanded(false);
+    }
   };
 
   const updateNotes = e => {

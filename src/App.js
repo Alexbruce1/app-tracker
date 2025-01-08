@@ -111,7 +111,6 @@ function App() {
       .from("applications")
       .select("*")
       .gt("company_name", query)
-      // .ilike("company_name", "%CaseInsensitive%")  
       
     setJobList(data);
   }
