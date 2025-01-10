@@ -101,6 +101,7 @@ function JobList({
         {filtersOpen && (
           <div className="job-item-filter-list job-list-child">
             {/* Add filters here */}
+            
           </div>
         )}
       </div>
