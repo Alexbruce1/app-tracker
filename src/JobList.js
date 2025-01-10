@@ -8,15 +8,15 @@ import clear from "./assets/clear.svg";
 import refresh from "./assets/refresh.svg";
 
 function JobList({ 
-                  jobList, 
-                  getJobList, 
-                  deleteApplication, 
-                  updateApplication, 
-                  filterResultsByCompanyName, 
-                  applicationStatusOptions, 
-                  submitResultsSearch, 
-                  clearResultsSearch }) {
-
+  jobList, 
+  getJobList, 
+  deleteApplication, 
+  updateApplication, 
+  filterResultsByCompanyName, 
+  applicationStatusOptions, 
+  submitResultsSearch, 
+  clearResultsSearch }) {
+    
   const [searchFieldText, setSearchFieldText] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [resultsPage, setResultsPage] = useState(1);
