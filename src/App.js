@@ -52,7 +52,11 @@ function App() {
     }
 
     const sortedData = data.sort((a, b) => {
-      return new Date(b.applied_date) - new Date(a.applied_date);
+      if (new Date(a.applied_date) !== new Date(b.applied_date)) {
+        return new Date(b.applied_date) - new Date(a.applied_date);
+      } else {
+        return new Date(b.created_at) - new Date(a.created_at);
+      }
     });
     
     setJobList(sortedData);
