@@ -48,7 +48,7 @@ function Stats({ jobList }) {
       </div>
       <div className="stat-container">
         <p className="stat-title">
-          Jobs Tracked
+          Jobs Shown
         </p> 
         <p className="stat-count">
           {jobCount}

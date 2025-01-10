@@ -3,7 +3,20 @@ import clear from "./assets/clear.svg";
 import caret from "./assets/caret.svg";
 import "./JobItem.css";
 
-function JobItem({ id, companyName, jobBoard, notes, createdAt, appliedDate, deleteApplication, updateApplication, heardBack, customLetter, applicationStatus, applicationStatusOptions }) {
+function JobItem({ 
+  id, 
+  companyName, 
+  jobBoard, 
+  notes, 
+  createdAt, 
+  appliedDate, 
+  deleteApplication, 
+  updateApplication, 
+  heardBack, 
+  customLetter, 
+  applicationStatus, 
+  applicationStatusOptions }) {
+    
   const [isExpanded, setIsExpanded] = useState(false);
   const [newNotes, setNewNotes] = useState(notes);
   const [notesUpdated, setNotesUpdated] = useState(notes);
