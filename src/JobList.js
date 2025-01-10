@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./JobList.css";
 import caret from "./assets/caret.svg";
+import doubleCaret from "./assets/double-caret.svg";
 import JobItem from "./JobItem";
 import search from "./assets/search.svg";
 import filter from "./assets/filter.svg";
@@ -150,6 +151,12 @@ function JobList({
       </div>
       {totalPages > 1 && (
         <div className="job-list-page-controls">
+          <div className={resultsPage > 1 ? "job-list-page-control-button" : "job-list-page-control-button-hidden job-list-page-control-button"}>
+            <img 
+              src={doubleCaret} 
+              className="job-list-page-control-caret caret-left"
+              onClick={() => setResultsPage(1)} />
+          </div>
           <div 
             className={resultsPage > 1 ? "job-list-page-control-button" : "job-list-page-control-button-hidden job-list-page-control-button"} 
             onClick={() => setResultsPage((prev) => Math.max(prev - 1, 1))}>
@@ -157,13 +164,21 @@ function JobList({
               src={caret} 
               className="job-list-page-control-caret caret-left"/>
           </div>
-          <div className="job-list-page-control-button">{resultsPage}</div>
+          <div className="job-list-page-control-button">
+            {resultsPage}
+          </div>
           <div 
             className={resultsPage < totalPages ? "job-list-page-control-button" : "job-list-page-control-button-hidden job-list-page-control-button"} 
             onClick={() => setResultsPage((prev) => Math.min(prev + 1, totalPages))}>
             <img 
               src={caret} 
               className="job-list-page-control-caret"/>
+          </div>
+          <div className={resultsPage < totalPages ? "job-list-page-control-button" : "job-list-page-control-button-hidden job-list-page-control-button"}>
+            <img 
+              src={doubleCaret} 
+              className="job-list-page-control-caret"
+              onClick={() => setResultsPage(totalPages)} />
           </div>
         </div>
       )}
