@@ -7,13 +7,14 @@ import caret from "./assets/caret.svg";
 
 function App() {
   const [formData, setFormData] = useState({
-    company: "",
-    date: "",
-    jobBoard: "",
+    company_name: "",
+    applied_date: "",
+    job_Board: "",
     notes: "",
     customCoverLetter: false,
     heardBack: false,
   });
+  const [filteredResults, setFilteredResults] = useState([]);
 
   const applicationStatusOptions = [
     "Application Status",
@@ -35,7 +36,7 @@ function App() {
     const today = new Date().toISOString().split("T")[0];
     setFormData((prev) => ({
       ...prev,
-      date: today
+      applied_date: today
     }));
 
     getJobList();
@@ -65,9 +66,9 @@ function App() {
         .from("applications")
         .insert([
           {
-            company_name: formData.company,
-            applied_date: formData.date,
-            job_board: formData.jobBoard,
+            company_name: formData.company_name,
+            applied_date: formData.applied_date,
+            job_board: formData.job_Board,
             notes: formData.notes || "",
             custom_cover_letter: formData.customCoverLetter,
             heard_back: false,
@@ -80,9 +81,9 @@ function App() {
         alert("Failed to save job application. Please try again.");
       } else {
         setFormData({
-          company: "",
-          date: new Date().toISOString().split("T")[0],
-          jobBoard: formData.jobBoard,
+          company_name: "",
+          applied_date: new Date().toISOString().split("T")[0],
+          job_Board: formData.job_Board,
           notes: "",
           customCoverLetter: false,
           heardBack: false,
@@ -106,13 +107,24 @@ function App() {
   };
 
   const filterResultsByCompanyName = async (query) => {
-
     let { data, error } = await supabase
       .from("applications")
       .select("*")
-      .gt("company_name", query)
+      .gte("company_name", query)
       
     setJobList(data);
+  };
+
+  const submitResultsSearch = (query) => {
+    const filteredData = jobList.filter((job) => {
+      return job.company_name.toLowerCase().includes(query);
+    });
+
+    setFilteredResults(filteredData);
+  };
+
+  const clearResultsSearch = () => {
+    setFilteredResults([]);
   }
 
   const updateApplication = async (id, element, updates) => {
@@ -125,8 +137,6 @@ function App() {
       return null;
     }
     return data;
-
-    getJobList();
   };
   
   const handleChange = (e) => {
@@ -161,8 +171,8 @@ function App() {
               placeholder="Company"
               className="form-element company-field"
               autoComplete="off"
-              name="company"
-              value={formData.company}
+              name="company_name"
+              value={formData.company_name}
               onChange={handleChange}
               required
             />
@@ -170,15 +180,15 @@ function App() {
               type="date"
               placeholder="Date Applied"
               className="form-element date-applied-field"
-              defaultValue={formData.date}
+              defaultValue={formData.applied_date}
               name="date"
               onChange={handleChange}
               required
             />
             <select
               className="form-element job-board-field"
-              name="jobBoard"
-              value={formData.jobBoard}
+              name="job_Board"
+              value={formData.job_Board}
               onChange={handleChange}
             >
               <option>Job Board</option>
@@ -224,12 +234,14 @@ function App() {
       </div>
       {jobList.length > 0 && (
         <JobList 
-        jobList={jobList} 
+        jobList={filteredResults.length > 0 ? filteredResults : jobList} 
         getJobList={getJobList} 
         deleteApplication={deleteApplication}
         updateApplication={updateApplication}
-        filterResultsByCompanyName={filterResultsByCompanyName}
-        applicationStatusOptions={applicationStatusOptions}/>
+        filterResultsByCompanyName={submitResultsSearch}
+        applicationStatusOptions={applicationStatusOptions}
+        submitResultsSearch={submitResultsSearch}
+        clearResultsSearch={clearResultsSearch}/>
       )}
       <Stats jobList={jobList}/>
       <div className="app-header-background"></div>

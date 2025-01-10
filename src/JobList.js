@@ -7,7 +7,16 @@ import filter from "./assets/filter.svg";
 import clear from "./assets/clear.svg";
 import refresh from "./assets/refresh.svg";
 
-function JobList({ jobList, getJobList, deleteApplication, updateApplication, filterResultsByCompanyName, applicationStatusOptions }) {
+function JobList({ 
+                  jobList, 
+                  getJobList, 
+                  deleteApplication, 
+                  updateApplication, 
+                  filterResultsByCompanyName, 
+                  applicationStatusOptions, 
+                  submitResultsSearch, 
+                  clearResultsSearch }) {
+
   const [searchFieldText, setSearchFieldText] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [resultsPage, setResultsPage] = useState(1);
@@ -45,18 +54,26 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication, fi
 
   const clearSearchField = () => {
     setSearchFieldText("");
+    clearResultsSearch();
   };
 
   const toggleFiltersOpen = () => {
     setFiltersOpen(!filtersOpen);
   };
 
+  const submitSearch = (e) => {
+    e.preventDefault();
+    submitResultsSearch(searchFieldText.toLowerCase());
+  }
+
   const totalPages = Math.ceil(categorizedJobs.length / resultsShown);
 
   return (
     <div className="app-content body-app-content">
       <div className="job-search job-list-child">
-        <div className="job-search-top-row">
+        <form 
+          className="job-search-top-row" 
+          onSubmit={submitSearch}>
           <button className="button-element job-search-refresh" onClick={getJobList}>
             <img className="job-search-icon refresh-button-icon" src={refresh} />
           </button>
@@ -80,7 +97,7 @@ function JobList({ jobList, getJobList, deleteApplication, updateApplication, fi
           <button className="job-search-submit button-element">
             <img src={search} className="job-search-icon filter-button-icon" />
           </button>
-        </div>
+        </form>
         {filtersOpen && (
           <div className="job-item-filter-list job-list-child">
             {/* Add filters here */}
