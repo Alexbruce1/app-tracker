@@ -16,6 +16,19 @@ function App() {
   });
   const [filteredResults, setFilteredResults] = useState([]);
 
+  const jobBoards = [
+  "Job Board",
+  "LinkedIn",
+  "WellFound",
+  "Welcome To The Jungle",
+  "Robert Half",
+  "GlassDoor",
+  "BuiltIn",
+  "Indeed",
+  "Zip Recruiter",
+  "Other",
+  ]
+
   const applicationStatusOptions = [
     "Application Status",
     "Haven't heard back",
@@ -193,18 +206,10 @@ function App() {
               className="form-element job-board-field"
               name="job_Board"
               value={formData.job_Board}
-              onChange={handleChange}
-            >
-              <option>Job Board</option>
-              <option>LinkedIn</option>
-              <option>WellFound</option>
-              <option>Welcome To The Jungle</option>
-              <option>Robert Half</option>
-              <option>GlassDoor</option>
-              <option>BuiltIn</option>
-              <option>Indeed</option>
-              <option>Zip Recruiter</option>
-              <option>Other</option>
+              onChange={handleChange}>
+              {jobBoards.map((jobBoard, index) => (
+                  <option key={index}>{jobBoard}</option>
+                ))}
             </select>
             <input
               type="submit"
