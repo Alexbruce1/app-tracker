@@ -246,14 +246,14 @@ function App() {
       </div>
       {jobList.length > 0 && (
         <JobList 
-        jobList={filteredResults.length > 0 ? filteredResults : jobList} 
-        getJobList={getJobList} 
-        deleteApplication={deleteApplication}
-        updateApplication={updateApplication}
-        filterResultsByCompanyName={submitResultsSearch}
-        applicationStatusOptions={applicationStatusOptions}
-        submitResultsSearch={submitResultsSearch}
-        clearResultsSearch={clearResultsSearch}/>
+          jobList={filteredResults.length > 0 ? filteredResults : jobList} 
+          getJobList={getJobList} 
+          deleteApplication={deleteApplication}
+          updateApplication={updateApplication}
+          filterResultsByCompanyName={submitResultsSearch}
+          applicationStatusOptions={applicationStatusOptions}
+          submitResultsSearch={submitResultsSearch}
+          clearResultsSearch={clearResultsSearch}/>
       )}
       <Stats jobList={jobList}/>
       <div className="app-header-background"></div>
