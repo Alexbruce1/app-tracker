@@ -47,9 +47,7 @@ function JobList({
   const paginatedJobs = categorizedJobs.slice(startIndex, endIndex);
 
   const handleTextInput = (e) => {
-    e.preventDefault();
     setSearchFieldText(e.target.value);
-
     filterResultsByCompanyName(e.target.value);
   };
 
@@ -83,7 +81,7 @@ function JobList({
             className="job-search-field"
             placeholder="Search for a Company"
             value={searchFieldText}
-            onChange={handleTextInput}
+            onInput={handleTextInput}
           />
           {searchFieldText && (
             <button className="job-search-clear-text" onClick={clearSearchField}>
