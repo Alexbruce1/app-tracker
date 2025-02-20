@@ -21,7 +21,7 @@ function JobList({
   const [searchFieldText, setSearchFieldText] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [resultsPage, setResultsPage] = useState(1);
-  const [resultsShown] = useState(10);
+  const [resultsShown, setResultsShown] = useState(10);
 
   const now = new Date();
   const startOfWeek = new Date(now);
@@ -65,6 +65,11 @@ function JobList({
     submitResultsSearch(searchFieldText.toLowerCase());
   }
 
+  const handleResultsShownChange = (e) => {
+    setResultsShown(parseInt(e.target.value));
+    setResultsPage(1);
+  }
+
   const totalPages = Math.ceil(categorizedJobs.length / resultsShown);
 
   return (
@@ -100,7 +105,17 @@ function JobList({
         {filtersOpen && (
           <div className="job-item-filter-list job-list-child">
             {/* Add filters here */}
-            
+            <div className="results-filter">
+              <label className="filter-label">Results shown</label>
+              <select 
+                className="results-shown-select"
+                onChange={handleResultsShownChange} 
+                value={resultsShown}>
+                <option value={10}>10</option>
+                <option value={20}>20</option>
+                <option value={100}>100</option>
+              </select>
+            </div>
           </div>
         )}
       </div>
