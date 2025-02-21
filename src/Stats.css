@@ -1,6 +1,7 @@
 .stats-section {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
   gap: 20px;
   padding-bottom: 20px;
 }
@@ -50,6 +51,38 @@
   padding: 0 10px;
 }
 
+.stats-jobs,
+.stats-job-boards {
+  width: 40%;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.stats-count-job-boards {
+  padding-inline-start: 12px;
+}
+
+.stats-count-text {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.stats-count-p {
+  margin: 0;
+}
+
+.stats-count-bold {
+  font-weight: 700;
+  margin: 0;
+  padding: 0 4px;
+}
+
+.job-board-li {
+  display: flex;
+  justify-content: space-between;
+}
+
 .stat-container {
   border-radius: 15px;
   box-shadow: 0 5px 10px -3px #ddd;
@@ -87,4 +120,12 @@
 
 .color-indicator-declined {
   background-color: var(--declined);
+}
+
+@media (max-width: 700px) {
+  .stats-jobs,
+  .stats-job-boards {
+    width: 50%;
+    margin: auto;
+  }
 }

@@ -110,7 +110,7 @@ function App() {
       console.error("Unexpected error:", error);
     }
 
-    getJobList();
+    setTimeout(getJobList, 500);
   };
 
   const deleteApplication = async (id) => {

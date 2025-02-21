@@ -8,6 +8,7 @@ function Stats({ jobList }) {
   const [BuiltInCount, setBuiltInCount] = useState(0);
   const [IndeedCount, setIndeedCount] = useState(0);
   const [LinkedInCount, setLinkedInCount] = useState(0);
+  const [wttjCount, setWttjCount] = useState(0);
   const [jobCount, setJobCount] = useState(0);
   const [statusDeclined, setStatusDeclined] = useState(0);
 
@@ -18,6 +19,7 @@ function Stats({ jobList }) {
     const builtin = jobList.filter(job => job.job_board === "BuiltIn").length;
     const indeed = jobList.filter(job => job.job_board === "Indeed").length;
     const linkedin = jobList.filter(job => job.job_board === "LinkedIn").length;
+    const wttj = jobList.filter(job => job.job_board === "Welcome To The Jungle").length;
     const declined = jobList.filter(job => job.status === "Declined").length;
 
     setCustomCoverLetterCount(customCoverLetterCount);
@@ -26,6 +28,7 @@ function Stats({ jobList }) {
     setBuiltInCount(builtin);
     setIndeedCount(indeed);
     setLinkedInCount(linkedin);
+    setWttjCount(wttj);
     setJobCount(jobCount);
     setStatusDeclined(declined);
 
@@ -46,74 +49,72 @@ function Stats({ jobList }) {
           </div>
         )}
       </div>
-      <div className="stat-container">
-        <p className="stat-title">
-          Jobs Shown
-        </p> 
-        <p className="stat-count">
-          {jobCount}
-        </p>
-      </div>
-      <div className="stat-container">
-        <p className="stat-title">
-          Haven't Heard Back
-        </p> 
-        <div className="color-indicator color-indicator-havent-heard-back">
-          <p className="stat-count">
-            {haventHeardBackCount}
+      <div className="stats-jobs">
+        <div className="stats-count-text">
+          <p className="stats-count-p stats-count-bold">
+            {jobCount} 
+          </p>
+          <p className="stats-count-p">
+            Jobs Applied For
+          </p>
+        </div>
+        <div className="stats-count-text">
+          <p className="stats-count-p stats-count-bold">
+            {heardBackCount} 
+          </p>
+          <p className="stats-count-p">
+            Heard Back ({ (heardBackCount / jobCount).toFixed(3) * 100 }%)
+          </p>
+        </div>
+        <div className="stats-count-text">
+          <p className="stats-count-p stats-count-bold">
+            {customCoverLetterCount} 
+          </p>
+          <p className="stats-count-p">
+            Custom Cover Letters
           </p>
         </div>
       </div>
-      <div className="stat-container">
-        <p className="stat-title">
-          Declined
-        </p> 
-        <div className="color-indicator color-indicator-declined">
-          <p className="stat-count">
-            {statusDeclined}
+      <div className="stats-job-boards">
+        <div className="stats-count-text">
+          <p className="stats-count-bold">
+            Job Board split:
           </p>
         </div>
+        <ul className="stats-count-p stats-count-job-boards">
+          <li className="job-board-li">
+            BuiltIn:
+            <p className="stats-count-bold">
+              {(BuiltInCount / jobCount * 100).toFixed(1)}%
+            </p>
+          </li>
+          <li className="job-board-li">
+            Indeed:
+            <p className="stats-count-bold">
+              {(IndeedCount / jobCount * 100).toFixed(1)}%
+            </p>
+          </li>
+          <li className="job-board-li">
+            LinkedIn:
+            <p className="stats-count-bold">
+              {(LinkedInCount / jobCount * 100).toFixed(1)}%
+            </p>
+          </li>
+          <li className="job-board-li">
+            Welcome To The Jungle:
+            <p className="stats-count-bold">
+              {(wttjCount / jobCount * 100).toFixed(1)}%
+            </p>
+          </li>
+          <li className="job-board-li">
+            Other:
+            <p className="stats-count-bold">
+              {((jobCount - BuiltInCount - IndeedCount - LinkedInCount) / jobCount * 100).toFixed(2)}%
+            </p>
+          </li>
+        </ul>
       </div>
-      {/* <div className="stat-container">
-        <p className="stat-title">
-          Custom Cover Letters
-        </p> 
-        <p className="stat-count">
-          {customCoverLetterCount}
-        </p>
-      </div>
-      <div className="stat-container">
-        <p className="stat-title">
-          Heard Back
-        </p> 
-        <p className="stat-count">
-          {heardBackCount}
-        </p>
-      </div>
-      <div className="stat-container">
-        <p className="stat-title">
-          BuiltIn Applications
-        </p> 
-        <p className="stat-count">
-          {BuiltInCount}
-        </p>
-      </div>
-      <div className="stat-container">
-        <p className="stat-title">
-          Indeed Applications
-        </p> 
-        <p className="stat-count">
-          {IndeedCount}
-        </p>
-      </div>
-      <div className="stat-container">
-        <p className="stat-title">
-          LinkedIn Applications
-        </p> 
-        <p className="stat-count">
-          {LinkedInCount}
-        </p>
-      </div> */}
+
     </div>
   );
 }
