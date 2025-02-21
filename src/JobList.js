@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./JobList.css";
 import caret from "./assets/caret.svg";
 import doubleCaret from "./assets/double-caret.svg";
@@ -22,10 +22,19 @@ function JobList({
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [resultsPage, setResultsPage] = useState(1);
   const [resultsShown, setResultsShown] = useState(10);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  const mobileWidthCutoff = 860;
   const now = new Date();
   const startOfWeek = new Date(now);
   startOfWeek.setDate(now.getDate() - now.getDay());
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const thisWeekJobs = jobList.filter((job) => {
     const appliedDate = new Date(job.applied_date || job.created_at);
@@ -104,7 +113,6 @@ function JobList({
         </form>
         {filtersOpen && (
           <div className="job-item-filter-list job-list-child">
-            {/* Add filters here */}
             <div className="results-filter">
               <label className="filter-label">Results shown</label>
               <select 
@@ -123,7 +131,7 @@ function JobList({
         <div className="job-item-main-legend">
           <p>Company Name</p>
           <p>Job Board</p>
-          <p>Status</p>
+          {windowWidth > mobileWidthCutoff && <p>Status</p> }
           <p>Date Applied</p>
         </div>
         {paginatedJobs.map((item, index) => {
@@ -135,14 +143,6 @@ function JobList({
             );
           }
 
-          const formattedDate = item.applied_date
-            ? new Date(item.applied_date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              })
-            : "N/A";
-
           return (
             <JobItem
               key={item.id}
@@ -151,13 +151,14 @@ function JobList({
               jobBoard={item.job_board}
               notes={item.notes}
               createdAt={item.created_at}
-              appliedDate={formattedDate}
+              appliedDate={item.applied_date}
               deleteApplication={deleteApplication}
               updateApplication={updateApplication}
               heardBack={item.heard_back}
               customLetter={item.custom_cover_letter}
               applicationStatus={item.status}
               applicationStatusOptions={applicationStatusOptions}
+              mobileWidthCutoff={mobileWidthCutoff}
             />
           );
         })}

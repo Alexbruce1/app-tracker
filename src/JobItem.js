@@ -15,7 +15,8 @@ function JobItem({
   heardBack, 
   customLetter, 
   applicationStatus, 
-  applicationStatusOptions
+  applicationStatusOptions,
+  mobileWidthCutoff
 }) {
     
   const [isExpanded, setIsExpanded] = useState(false);
@@ -33,8 +34,17 @@ function JobItem({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const displayedJobBoard = (jobBoard === "Welcome To The Jungle" && windowWidth < 860) ? "WTTJ" : jobBoard;
-
+  const displayedJobBoard = (jobBoard === "Welcome To The Jungle" && windowWidth < mobileWidthCutoff) ? "WTTJ" : jobBoard;
+  const formattedDate = (windowWidth < mobileWidthCutoff) ? new Date(appliedDate).toLocaleDateString("en-US", {
+    year: "2-digit",
+    month: "numeric",
+    day: "numeric",
+  }) : new Date(appliedDate).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+  
   useEffect(() => {
     setNewNotes(notes);
     setAppStatus(applicationStatus);
@@ -113,7 +123,7 @@ function JobItem({
 
   return (
     <div 
-      className="job-item" 
+      className={isExpanded ? "job-item job-item-expanded" : "job-item"}
       key={id}>
       <div className="job-item-top-row">
         <div className="caret-container">
@@ -124,8 +134,10 @@ function JobItem({
         </div>
         <div className="job-item-inner-container">
           <p className="job-item-company" onClick={handleExpansion}>{companyName}</p>
-          <p className="job-item-board">{displayedJobBoard}</p>
-          {isExpanded && (
+          {(!isExpanded || windowWidth > mobileWidthCutoff) && (
+            <p className="job-item-board">{displayedJobBoard}</p>
+          )}
+          {isExpanded && windowWidth > mobileWidthCutoff && (
             <select 
               className="status-dropdown job-item-status" 
               onChange={handleFieldUpdates} 
@@ -136,14 +148,14 @@ function JobItem({
                 })}
             </select>
           )}
-          {!isExpanded && (
+          {!isExpanded && windowWidth > mobileWidthCutoff && (
             <p className="job-item-status">{
               appStatus === applicationStatusOptions[0] ? "-" : 
               appStatus === applicationStatusOptions[1] ? "-" : 
               !appStatus ? "-" :
               appStatus}</p>
           )}
-          <p className="job-item-applied-date">{appliedDate}</p>
+          <p className="job-item-applied-date">{formattedDate}</p>
         </div>
       </div>
       {isExpanded && (
@@ -161,6 +173,25 @@ function JobItem({
               </label>
               <p className="custom-letter-text">Custom Cover Letter</p>
             </div>
+            {windowWidth < mobileWidthCutoff && (
+              <select 
+                className="status-dropdown job-item-status" 
+                onChange={handleFieldUpdates} 
+                name="status"
+                value={appStatus || "Application Status"}>
+                  {applicationStatusOptions.map(option => {
+                    return <option key={option} value={option}>{option}</option>
+                  })}
+              </select>
+            )}
+
+            {windowWidth > mobileWidthCutoff && (
+              <button className="delete-item-button" onClick={handleDeletePress}>
+                <img className="delete-record-icon" src={clear} />
+              </button>
+            )}
+          </div>
+          <div className="job-item-bottom-row-field-container">
             <div className="job-item-notes-container">
               <input 
                 type="text" 
@@ -173,9 +204,11 @@ function JobItem({
                 onClick={handleFieldUpdates}
                 name={"notes"}>{notesUpdated ? "Saved" : "Update"}</button>
             </div>
-            <button className="delete-item-button" onClick={handleDeletePress}>
-              <img className="delete-record-icon" src={clear} />
-            </button>
+            {windowWidth < mobileWidthCutoff && (
+              <button className="delete-item-button" onClick={handleDeletePress}>
+                <img className="delete-record-icon" src={clear} />
+              </button>
+            )}
           </div>
         </div>
       )}
