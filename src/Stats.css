@@ -1,6 +1,7 @@
 .stats-section {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: 20px;
   padding-bottom: 20px;
 }
@@ -49,6 +50,37 @@
   align-items: center;
   padding: 0 10px;
 }
+
+.stats-jobs,
+.stats-job-boards {
+  width: 48%;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.stats-count-text {
+  display: flex;
+  padding: 0 8px;
+  margin: 8px 0;
+}
+
+.stats-count-p {
+  margin: 0;
+}
+
+.stats-count-bold {
+  font-weight: 700;
+  margin: 0;
+  padding: 0 4px;
+}
+
+.job-board-li {
+  display: flex;
+}
+
+/* .stats-count-job-boards {
+  display: ;
+} */
 
 .stat-container {
   border-radius: 15px;
