@@ -15,7 +15,8 @@ function JobItem({
   heardBack, 
   customLetter, 
   applicationStatus, 
-  applicationStatusOptions }) {
+  applicationStatusOptions
+}) {
     
   const [isExpanded, setIsExpanded] = useState(false);
   const [newNotes, setNewNotes] = useState(notes);
@@ -23,6 +24,16 @@ function JobItem({
   const [updateHeardBack, setUpdateHeardBack] = useState(heardBack);
   const [customCoverLetter, setCustomCoverLetter] = useState(customLetter);
   const [appStatus, setAppStatus] = useState(applicationStatus);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const displayedJobBoard = (jobBoard === "Welcome To The Jungle" && windowWidth < 860) ? "WTTJ" : jobBoard;
 
   useEffect(() => {
     setNewNotes(notes);
@@ -113,7 +124,7 @@ function JobItem({
         </div>
         <div className="job-item-inner-container">
           <p className="job-item-company" onClick={handleExpansion}>{companyName}</p>
-          <p className="job-item-board">{jobBoard}</p>
+          <p className="job-item-board">{displayedJobBoard}</p>
           {isExpanded && (
             <select 
               className="status-dropdown job-item-status" 
