@@ -77,7 +77,7 @@ function Stats({ jobList }) {
       </div>
       <div className="stats-job-boards">
         <div className="stats-count-text">
-          <p className="stats-count-p">
+          <p className="stats-count-bold">
             Job Board split:
           </p>
         </div>
