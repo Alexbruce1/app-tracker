@@ -215,10 +215,12 @@
 
   .date-applied-field {
     width: 35%;
+    background-color: unset;
   }
 
   .job-board-field {
     width: 30%;
+    background-color: unset;
   }
 
   .form-submit {
