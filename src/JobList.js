@@ -11,6 +11,7 @@ import refresh from "./assets/refresh.svg";
 function JobList({ 
   jobList, 
   getJobList, 
+  jobBoards,
   deleteApplication, 
   updateApplication, 
   filterResultsByCompanyName, 
@@ -24,17 +25,12 @@ function JobList({
   const [resultsPage, setResultsPage] = useState(1);
   const [resultsShown, setResultsShown] = useState(10);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [usedJobBoards, setUsedJobBoards] = useState([]);
+  const [filteredByJobBoard, setFilteredByJobBoard] = useState(false);
 
   const mobileWidthCutoff = 860;
   const now = new Date();
   const startOfWeek = new Date(now);
   startOfWeek.setDate(now.getDate() - now.getDay());
-
-  useEffect(() => {
-    const jobBoards = jobList.map((job) => job.job_board);
-    setUsedJobBoards([...new Set(jobBoards)]);
-  }, [jobList]);
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -87,6 +83,12 @@ function JobList({
   }
 
   const handleJobBoardFilter = (e) => {
+    if (e.target.value === "Job Board") {
+      setFilteredByJobBoard(false);
+    } else {
+      setFilteredByJobBoard(true);
+    }
+
     filterJobsByJobBoard(e.target.value);
   }
 
@@ -106,7 +108,7 @@ function JobList({
             className="job-search-field"
             placeholder="Search for a Company"
             value={searchFieldText}
-            onInput={handleTextInput}
+            onChange={handleTextInput}
           />
           {searchFieldText && (
             <button className="job-search-clear-text" onClick={clearSearchField}>
@@ -140,11 +142,10 @@ function JobList({
       </div>
       <div className="job-item-container job-list-child">
         <div className="job-item-main-legend">
-          <p className="job-list-company-name">Company Name</p>
+          <p className="job-list-company-name">Company Name {filteredByJobBoard && <strong>{jobList.length}</strong>}</p>
           <select onChange={handleJobBoardFilter} className="job-list-job-board">
-            <option default>Job Board</option>
-            {usedJobBoards && usedJobBoards.map((job) => (
-              <option >{job}</option>
+            {jobBoards && jobBoards.map((job) => (
+              <option default={job === "Job Board"} >{job}</option>
             ))}
           </select>
           {windowWidth > mobileWidthCutoff && <p className="job-list-status">Status</p> }

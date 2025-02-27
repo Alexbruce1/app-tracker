@@ -38,6 +38,7 @@ function App() {
     "Declined"
   ];
   const [jobList, setJobList] = useState([]);
+  const [filterableJobList, setFilterableJobList] = useState([]);
   const [FormExpanded, setFormExpanded] = useState(false);
 
   useEffect(() => {
@@ -73,6 +74,7 @@ function App() {
     });
     
     setJobList(sortedData);
+    setFilterableJobList(sortedData);
   };
   
   const saveJob = async (e) => {
@@ -124,12 +126,13 @@ function App() {
   };
 
   const filterResultsByCompanyName = async (query) => {
+    console.log("filterResultsByCompanyName", query); 
     let { data, error } = await supabase
       .from("applications")
       .select("*")
       .gte("company_name", query)
       
-    setJobList(data);
+    setFilterableJobList(data);
   };
 
   const submitResultsSearch = (query) => {
@@ -254,13 +257,14 @@ function App() {
           <img src={caret} className={FormExpanded ? "form-caret-img form-caret-img-expanded" : "form-caret-img"} />
         </button>
       </div>
-      {jobList.length > 0 && (
+      {filterableJobList.length > 0 && (
         <JobList 
-          jobList={filteredResults.length > 0 ? filteredResults : jobList} 
+          jobList={filteredResults.length > 0 ? filteredResults : filterableJobList} 
           getJobList={getJobList} 
+          jobBoards={jobBoards}
           deleteApplication={deleteApplication}
           updateApplication={updateApplication}
-          filterResultsByCompanyName={submitResultsSearch}
+          filterResultsByCompanyName={filterResultsByCompanyName}
           applicationStatusOptions={applicationStatusOptions}
           submitResultsSearch={submitResultsSearch}
           clearResultsSearch={clearResultsSearch}
