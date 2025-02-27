@@ -140,15 +140,15 @@ function JobList({
       </div>
       <div className="job-item-container job-list-child">
         <div className="job-item-main-legend">
-          <p>Company Name</p>
+          <p className="job-list-company-name">Company Name</p>
           <select onChange={handleJobBoardFilter} className="job-list-job-board">
             <option default>Job Board</option>
             {usedJobBoards && usedJobBoards.map((job) => (
               <option >{job}</option>
             ))}
           </select>
-          {windowWidth > mobileWidthCutoff && <p>Status</p> }
-          <p>Date Applied</p>
+          {windowWidth > mobileWidthCutoff && <p className="job-list-status">Status</p> }
+          <p className="job-list-date-applied">Date Applied</p>
         </div>
         {paginatedJobs.map((item, index) => {
           if (item.isDivider) {
