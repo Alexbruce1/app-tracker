@@ -63,7 +63,7 @@ function Stats({ jobList }) {
             {heardBackCount} 
           </p>
           <p className="stats-count-p">
-            Heard Back ({ (heardBackCount / jobCount).toFixed(3) * 100 }%)
+            Heard Back ({ ((heardBackCount / jobCount) * 100).toFixed(3) }%)
           </p>
         </div>
         <div className="stats-count-text">
