@@ -14,7 +14,9 @@ function App() {
     customCoverLetter: false,
     heardBack: false,
   });
-  const [filteredResults, setFilteredResults] = useState([]);
+  const [jobList, setJobList] = useState([]);
+  const [filterableJobList, setFilterableJobList] = useState([]);
+  const [FormExpanded, setFormExpanded] = useState(false);
 
   const jobBoards = [
   "Job Board",
@@ -37,8 +39,6 @@ function App() {
     "Offer",
     "Declined"
   ];
-  const [jobList, setJobList] = useState([]);
-  const [FormExpanded, setFormExpanded] = useState(false);
 
   useEffect(() => {
     const isLocalhost = window.location.hostname === "localhost";
@@ -73,6 +73,7 @@ function App() {
     });
     
     setJobList(sortedData);
+    setFilterableJobList(sortedData);
   };
   
   const saveJob = async (e) => {
@@ -129,19 +130,19 @@ function App() {
       .select("*")
       .gte("company_name", query)
       
-    setJobList(data);
+    setFilterableJobList(data);
   };
 
-  const submitResultsSearch = (query) => {
+  const filterExistingResults = (query) => {
     const filteredData = jobList.filter((job) => {
       return job.company_name.toLowerCase().includes(query);
     });
 
-    setFilteredResults(filteredData);
+    setFilterableJobList(filteredData);
   };
 
   const clearResultsSearch = () => {
-    setFilteredResults([]);
+    setFilterableJobList([]);
   }
 
   const updateApplication = async (id, element, updates) => {
@@ -173,6 +174,14 @@ function App() {
 
   const handleFormExpansion = () => {
     setFormExpanded(!FormExpanded);
+  }
+
+  const filterJobsByJobBoard = (jobBoard) => {
+    const filteredData = jobList.filter((job) => {
+      return job.job_board === jobBoard;
+    });
+
+    setFilterableJobList(filteredData);
   }
 
   return (
@@ -244,16 +253,18 @@ function App() {
           <img src={caret} className={FormExpanded ? "form-caret-img form-caret-img-expanded" : "form-caret-img"} />
         </button>
       </div>
-      {jobList.length > 0 && (
+      {filterableJobList && (
         <JobList 
-          jobList={filteredResults.length > 0 ? filteredResults : jobList} 
+          jobList={ filterableJobList } 
           getJobList={getJobList} 
+          jobBoards={jobBoards}
           deleteApplication={deleteApplication}
           updateApplication={updateApplication}
-          filterResultsByCompanyName={submitResultsSearch}
+          filterResultsByCompanyName={filterResultsByCompanyName}
+          filterExistingResults={filterExistingResults}
           applicationStatusOptions={applicationStatusOptions}
-          submitResultsSearch={submitResultsSearch}
-          clearResultsSearch={clearResultsSearch}/>
+          clearResultsSearch={clearResultsSearch}
+          filterJobsByJobBoard={filterJobsByJobBoard}/>
       )}
       <Stats jobList={jobList}/>
       <div className="app-header-background"></div>

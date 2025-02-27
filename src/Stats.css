@@ -125,7 +125,7 @@
 @media (max-width: 700px) {
   .stats-jobs,
   .stats-job-boards {
-    width: 50%;
+    width: 80%;
     margin: auto;
   }
 }
