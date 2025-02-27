@@ -14,7 +14,9 @@ function App() {
     customCoverLetter: false,
     heardBack: false,
   });
-  const [filteredResults, setFilteredResults] = useState([]);
+  const [jobList, setJobList] = useState([]);
+  const [filterableJobList, setFilterableJobList] = useState([]);
+  const [FormExpanded, setFormExpanded] = useState(false);
 
   const jobBoards = [
   "Job Board",
@@ -37,9 +39,6 @@ function App() {
     "Offer",
     "Declined"
   ];
-  const [jobList, setJobList] = useState([]);
-  const [filterableJobList, setFilterableJobList] = useState([]);
-  const [FormExpanded, setFormExpanded] = useState(false);
 
   useEffect(() => {
     const isLocalhost = window.location.hostname === "localhost";
@@ -126,7 +125,6 @@ function App() {
   };
 
   const filterResultsByCompanyName = async (query) => {
-    console.log("filterResultsByCompanyName", query); 
     let { data, error } = await supabase
       .from("applications")
       .select("*")
@@ -135,16 +133,16 @@ function App() {
     setFilterableJobList(data);
   };
 
-  const submitResultsSearch = (query) => {
+  const filterExistingResults = (query) => {
     const filteredData = jobList.filter((job) => {
       return job.company_name.toLowerCase().includes(query);
     });
 
-    setFilteredResults(filteredData);
+    setFilterableJobList(filteredData);
   };
 
   const clearResultsSearch = () => {
-    setFilteredResults([]);
+    setFilterableJobList([]);
   }
 
   const updateApplication = async (id, element, updates) => {
@@ -183,9 +181,7 @@ function App() {
       return job.job_board === jobBoard;
     });
 
-    console.log(jobBoard, filteredData)
-
-    setFilteredResults(filteredData);
+    setFilterableJobList(filteredData);
   }
 
   return (
@@ -257,16 +253,16 @@ function App() {
           <img src={caret} className={FormExpanded ? "form-caret-img form-caret-img-expanded" : "form-caret-img"} />
         </button>
       </div>
-      {filterableJobList.length > 0 && (
+      {filterableJobList && (
         <JobList 
-          jobList={filteredResults.length > 0 ? filteredResults : filterableJobList} 
+          jobList={ filterableJobList } 
           getJobList={getJobList} 
           jobBoards={jobBoards}
           deleteApplication={deleteApplication}
           updateApplication={updateApplication}
           filterResultsByCompanyName={filterResultsByCompanyName}
+          filterExistingResults={filterExistingResults}
           applicationStatusOptions={applicationStatusOptions}
-          submitResultsSearch={submitResultsSearch}
           clearResultsSearch={clearResultsSearch}
           filterJobsByJobBoard={filterJobsByJobBoard}/>
       )}

@@ -7,6 +7,11 @@
   border-radius: 20px;
 }
 
+.job-search-no-results {
+  width: 100%;
+  text-align: center;
+}
+
 .job-search-top-row {
   height: 30px;
   border-radius: 20px;

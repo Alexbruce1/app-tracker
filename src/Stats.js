@@ -63,7 +63,7 @@ function Stats({ jobList }) {
             {heardBackCount} 
           </p>
           <p className="stats-count-p">
-            Heard Back ({ ((heardBackCount / jobCount) * 100).toFixed(3) }%)
+            Heard Back ({ ((heardBackCount / jobCount) * 100).toFixed(2) }%)
           </p>
         </div>
         <div className="stats-count-text">
@@ -85,31 +85,31 @@ function Stats({ jobList }) {
           <li className="job-board-li">
             BuiltIn:
             <p className="stats-count-bold">
-              {(BuiltInCount / jobCount * 100).toFixed(1)}%
+              {BuiltInCount}
             </p>
           </li>
           <li className="job-board-li">
             Indeed:
             <p className="stats-count-bold">
-              {(IndeedCount / jobCount * 100).toFixed(1)}%
+              {IndeedCount}
             </p>
           </li>
           <li className="job-board-li">
             LinkedIn:
             <p className="stats-count-bold">
-              {(LinkedInCount / jobCount * 100).toFixed(1)}%
+              {LinkedInCount}
             </p>
           </li>
           <li className="job-board-li">
             Welcome To The Jungle:
             <p className="stats-count-bold">
-              {(wttjCount / jobCount * 100).toFixed(1)}%
+              {wttjCount}
             </p>
           </li>
           <li className="job-board-li">
             Other:
             <p className="stats-count-bold">
-              {((jobCount - BuiltInCount - IndeedCount - LinkedInCount) / jobCount * 100).toFixed(2)}%
+              {jobCount - BuiltInCount - IndeedCount - LinkedInCount}
             </p>
           </li>
         </ul>
