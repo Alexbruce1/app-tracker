@@ -150,6 +150,12 @@
   width: 100%;
 }
 
+.job-list-job-board {
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
 .week-divider {
   margin: 0;
   line-height: 1;

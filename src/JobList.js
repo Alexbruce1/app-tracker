@@ -16,18 +16,25 @@ function JobList({
   filterResultsByCompanyName, 
   applicationStatusOptions, 
   submitResultsSearch, 
-  clearResultsSearch }) {
+  clearResultsSearch,
+  filterJobsByJobBoard }) {
     
   const [searchFieldText, setSearchFieldText] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [resultsPage, setResultsPage] = useState(1);
   const [resultsShown, setResultsShown] = useState(10);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [usedJobBoards, setUsedJobBoards] = useState([]);
 
   const mobileWidthCutoff = 860;
   const now = new Date();
   const startOfWeek = new Date(now);
   startOfWeek.setDate(now.getDate() - now.getDay());
+
+  useEffect(() => {
+    const jobBoards = jobList.map((job) => job.job_board);
+    setUsedJobBoards([...new Set(jobBoards)]);
+  }, [jobList]);
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -77,6 +84,10 @@ function JobList({
   const handleResultsShownChange = (e) => {
     setResultsShown(parseInt(e.target.value));
     setResultsPage(1);
+  }
+
+  const handleJobBoardFilter = (e) => {
+    filterJobsByJobBoard(e.target.value);
   }
 
   const totalPages = Math.ceil(categorizedJobs.length / resultsShown);
@@ -130,7 +141,12 @@ function JobList({
       <div className="job-item-container job-list-child">
         <div className="job-item-main-legend">
           <p>Company Name</p>
-          <p>Job Board</p>
+          <select onChange={handleJobBoardFilter} className="job-list-job-board">
+            <option default>Job Board</option>
+            {usedJobBoards && usedJobBoards.map((job) => (
+              <option >{job}</option>
+            ))}
+          </select>
           {windowWidth > mobileWidthCutoff && <p>Status</p> }
           <p>Date Applied</p>
         </div>

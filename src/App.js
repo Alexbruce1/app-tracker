@@ -175,6 +175,14 @@ function App() {
     setFormExpanded(!FormExpanded);
   }
 
+  const filterJobsByJobBoard = (jobBoard) => {
+    const filteredData = jobList.filter((job) => {
+      return job.job_board === jobBoard;
+    });
+
+    setFilteredResults(filteredData);
+  }
+
   return (
     <div className="App">
       <div className="header">
@@ -253,7 +261,8 @@ function App() {
           filterResultsByCompanyName={submitResultsSearch}
           applicationStatusOptions={applicationStatusOptions}
           submitResultsSearch={submitResultsSearch}
-          clearResultsSearch={clearResultsSearch}/>
+          clearResultsSearch={clearResultsSearch}
+          filterJobsByJobBoard={filterJobsByJobBoard}/>
       )}
       <Stats jobList={jobList}/>
       <div className="app-header-background"></div>
