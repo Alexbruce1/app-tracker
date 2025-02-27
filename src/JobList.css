@@ -170,7 +170,6 @@
   border: none;
   outline: none;
   font-size: 16px;
-  /* width: 32%; */
   text-align: center;
 }
 
@@ -230,4 +229,24 @@
   to {
     transform: rotate(-180deg);
   }
+}
+
+/* ---------- MEDIA QUERIES ------------- */
+@media (max-width: 860px) {
+  .job-item-main-legend p {
+    align-items: center;
+  }
+
+  .job-item-main-legend p {
+    width: unset;
+    margin: auto 0;
+  }
+
+  .job-list-job-board {
+    max-width: 35%;
+    margin: 12px auto;
+    border: 8px solid transparent;
+    background-color: transparent;
+    text-align: center;
+  } 
 }

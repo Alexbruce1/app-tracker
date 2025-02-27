@@ -180,6 +180,8 @@ function App() {
       return job.job_board === jobBoard;
     });
 
+    console.log(jobBoard, filteredData)
+
     setFilteredResults(filteredData);
   }
 
