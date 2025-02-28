@@ -19,7 +19,8 @@ function JobList({
   filterExistingResults, 
   applicationStatusOptions, 
   clearResultsSearch,
-  filterJobsByJobBoard }) {
+  filterJobsByJobBoard,
+  waitingOnFetch }) {
     
   const [searchFieldText, setSearchFieldText] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -117,9 +118,15 @@ function JobList({
           />
         </div>
         <div className="job-search-no-results">
-          <h3 className="no-results-header">
-            No results found...
-          </h3>
+          {waitingOnFetch ? (
+            <h3 className="no-results-header">
+              Loading jobs...
+            </h3>
+            ) : (
+            <h3 className="no-results-header">
+              No results found...
+            </h3>
+          )}
         </div>
       </div>
     ) : (
