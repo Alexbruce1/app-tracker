@@ -17,6 +17,7 @@ function App() {
   const [jobList, setJobList] = useState([]);
   const [filterableJobList, setFilterableJobList] = useState([]);
   const [FormExpanded, setFormExpanded] = useState(false);
+  const [waitingOnFetch, setWaitingOnFetch] = useState(false);
 
   const jobBoards = [
   "Job Board",
@@ -56,6 +57,8 @@ function App() {
   }, []);
 
   const getJobList = async () => {
+    setWaitingOnFetch(true);
+
     const { data, error } = await supabase
       .from("applications")
       .select("*");
@@ -74,6 +77,7 @@ function App() {
     
     setJobList(sortedData);
     setFilterableJobList(sortedData);
+    setWaitingOnFetch(false);
   };
   
   const saveJob = async (e) => {
@@ -264,7 +268,8 @@ function App() {
           filterExistingResults={filterExistingResults}
           applicationStatusOptions={applicationStatusOptions}
           clearResultsSearch={clearResultsSearch}
-          filterJobsByJobBoard={filterJobsByJobBoard}/>
+          filterJobsByJobBoard={filterJobsByJobBoard}
+          waitingOnFetch={waitingOnFetch}/>
       )}
       <Stats jobList={jobList}/>
       <div className="app-header-background"></div>
