@@ -181,11 +181,15 @@ function App() {
   }
 
   const filterJobsByJobBoard = (jobBoard) => {
-    const filteredData = jobList.filter((job) => {
-      return job.job_board === jobBoard;
-    });
-
-    setFilterableJobList(filteredData);
+    if (jobBoard === "Job Board") {
+      setFilterableJobList(jobList);
+    } else {
+      const filteredData = jobList.filter((job) => {
+        return job.job_board === jobBoard;
+      });
+  
+      setFilterableJobList(filteredData);
+    }
   }
 
   return (
