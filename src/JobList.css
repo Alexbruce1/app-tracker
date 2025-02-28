@@ -217,6 +217,10 @@
   color: #555;
 }
 
+.job-list-page-number:hover {
+  background-color: unset;
+}
+
 .job-list-page-control-caret {
   height: 24px;
   filter: invert(50%);
@@ -255,4 +259,14 @@
     background-color: transparent;
     text-align: center;
   } 
+
+  .job-list-page-control-button {
+    height: 24px;
+    width: 24px;
+    font-size: 20px;
+  }
+
+  .job-list-page-control-caret {
+    height: 32px;
+  }
 }

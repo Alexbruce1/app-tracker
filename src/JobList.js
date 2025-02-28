@@ -216,7 +216,7 @@ function JobList({
                 src={caret} 
                 className="job-list-page-control-caret caret-left"/>
             </div>
-            <div className="job-list-page-control-button">
+            <div className="job-list-page-control-button job-list-page-number">
               {resultsPage}
             </div>
             <div 
