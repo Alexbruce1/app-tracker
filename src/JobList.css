@@ -243,11 +243,16 @@
 
 /* ---------- MEDIA QUERIES ------------- */
 @media (max-width: 860px) {
-  .job-item-main-legend p {
-    align-items: center;
+  .filter-label {
+    font-size: 16px;
+  }
+  
+  .results-shown-select {
+    font-size: 16px;
   }
 
   .job-item-main-legend p {
+    align-items: center;
     width: unset;
     margin: auto 0;
   }
