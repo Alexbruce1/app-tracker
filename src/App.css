@@ -204,6 +204,20 @@
 }
 
 @media (max-width: 620px) {
+  .app-header-background,
+  .app-header-fade {
+    position: fixed;
+  }
+
+  .app-header-background {
+    height: 60%;
+  }
+
+  .app-header-fade {
+    height: 50%;
+    top: 10%;
+  }
+
   .application-submit-form {
     padding-bottom: 20px;
   }
