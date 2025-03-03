@@ -153,9 +153,9 @@ function JobList({
                   className="results-shown-select"
                   onChange={handleResultsShownChange} 
                   value={resultsShown}>
-                  <option value={10}>10</option>
-                  <option value={20}>20</option>
-                  <option value={100}>100</option>
+                  <option className="results-shown-option" value={10}>10</option>
+                  <option className="results-shown-option" value={20}>20</option>
+                  <option className="results-shown-option" value={100}>100</option>
                 </select>
               </div>
             </div>

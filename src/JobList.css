@@ -243,11 +243,46 @@
 
 /* ---------- MEDIA QUERIES ------------- */
 @media (max-width: 860px) {
-  .job-item-main-legend p {
-    align-items: center;
+  .job-search {
+    box-shadow: none;
+    border: 1px solid var(--main-blue);
+    border-radius: 30px;
+  }
+
+  .job-search-top-row {
+    height: 40px;
+  }
+  
+  .job-search-filter,
+  .job-search-submit {
+    width: 80px;
+  }
+  
+  .job-search-refresh {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    aspect-ratio: 1/1;
+  }
+
+  .job-search-submit {
+    border-radius: 20px;
+  }
+
+  .job-search-icon {
+    height: 24px;
+  }
+
+  .filter-label {
+    font-size: 16px;
+  }
+  
+  .results-shown-select {
+    font-size: 16px;
   }
 
   .job-item-main-legend p {
+    align-items: center;
     width: unset;
     margin: auto 0;
   }
