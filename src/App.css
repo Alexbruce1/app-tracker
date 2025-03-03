@@ -208,7 +208,8 @@
     padding-bottom: 20px;
   }
 
-  .application-submit-form-first-line {
+  .application-submit-form-first-line,
+  .application-submit-form-second-line {
     flex-wrap: wrap;
     justify-content: space-between;
   }
@@ -257,6 +258,7 @@
   }
 
   .form-notes-field {
-    width: 55%;
+    width: 100%;
+    font-size: 16px;
   } 
 }
