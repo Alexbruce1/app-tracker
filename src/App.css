@@ -167,6 +167,10 @@
   padding: 0;
   transition-duration: .3s;
   cursor: pointer;
+
+
+
+
 }
 
 .expand-form-button:hover {
@@ -200,9 +204,45 @@
 }
 
 @media (max-width: 620px) {
-  .application-submit-form-first-line {
+  .app-header-background,
+  .app-header-fade {
+    position: fixed;
+  }
+
+  .app-header-background {
+    height: 60%;
+  }
+
+  .app-header-fade {
+    height: 50%;
+    top: 10%;
+  }
+
+  .application-submit-form {
+    padding-bottom: 20px;
+  }
+
+  .application-submit-form-first-line,
+  .application-submit-form-second-line {
     flex-wrap: wrap;
     justify-content: space-between;
+  }
+
+  .expand-form-button {
+    height: 36px;
+    width: 36px;
+    margin-top: -10px;
+    box-shadow: none;
+    left: calc(50% - 18px);
+    border: 1.5px solid var(--main-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .form-caret-img {
+    height: 36px;
+    filter: invert(40%);
   }
 
   .form-element {
@@ -232,6 +272,7 @@
   }
 
   .form-notes-field {
-    width: 55%;
+    width: 100%;
+    font-size: 16px;
   } 
 }
