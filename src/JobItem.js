@@ -50,7 +50,9 @@ function JobItem({
     setAppStatus(applicationStatus);
   }, [notes, applicationStatus]);
 
-  const handleExpansion = () => {
+  const handleExpansion = (e) => {
+    e.stopPropagation(); 
+
     setIsExpanded(!isExpanded)
   }
 
@@ -125,17 +127,17 @@ function JobItem({
     <div 
       className={isExpanded ? "job-item job-item-expanded" : "job-item"}
       key={id}
-      onClick={handleExpansion}>
+      name="expand">
       <div className="job-item-top-row">
-        <div className="caret-container">
+        <div className="caret-container" onClick={e => handleExpansion(e)}>
           <img 
             className={isExpanded ? "job-search-icon job-item-caret job-item-caret-expanded" : "job-search-icon job-item-caret"} 
             src={caret}/>
         </div>
         <div className="job-item-inner-container">
-          <p className="job-item-company" onClick={handleExpansion}>{companyName}</p>
+          <p className="job-item-company" onClick={e => handleExpansion(e)}>{companyName}</p>
           {(!isExpanded || windowWidth > mobileWidthCutoff) && (
-            <p className="job-item-board">{displayedJobBoard}</p>
+            <p className="job-item-board" onClick={e => handleExpansion(e)}>{displayedJobBoard}</p>
           )}
           {isExpanded && windowWidth > mobileWidthCutoff && (
             <select 
@@ -149,13 +151,13 @@ function JobItem({
             </select>
           )}
           {!isExpanded && windowWidth > mobileWidthCutoff && (
-            <p className="job-item-status">{
+            <p className="job-item-status" onClick={e => handleExpansion(e)}>{
               appStatus === applicationStatusOptions[0] ? "-" : 
               appStatus === applicationStatusOptions[1] ? "-" : 
               !appStatus ? "-" :
               appStatus}</p>
           )}
-          <p className="job-item-applied-date">{formattedDate}</p>
+          <p className="job-item-applied-date" onClick={e => handleExpansion(e)}>{formattedDate}</p>
         </div>
       </div>
       {isExpanded && (
