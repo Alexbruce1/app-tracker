@@ -1,5 +1,6 @@
 .job-item {
   cursor: pointer;
+  margin: 2px 0;
 }
 
 .job-item:hover {
