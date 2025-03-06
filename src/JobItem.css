@@ -215,4 +215,9 @@
     border: none;
     padding: 8px;
   }
+
+  .job-item-notes,
+  .job-item-notes-submit {
+    font-size: 16px;
+  }
 }
