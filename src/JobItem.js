@@ -124,13 +124,13 @@ function JobItem({
   return (
     <div 
       className={isExpanded ? "job-item job-item-expanded" : "job-item"}
-      key={id}>
+      key={id}
+      onClick={handleExpansion}>
       <div className="job-item-top-row">
         <div className="caret-container">
           <img 
             className={isExpanded ? "job-search-icon job-item-caret job-item-caret-expanded" : "job-search-icon job-item-caret"} 
-            src={caret} 
-            onClick={handleExpansion}/>
+            src={caret}/>
         </div>
         <div className="job-item-inner-container">
           <p className="job-item-company" onClick={handleExpansion}>{companyName}</p>

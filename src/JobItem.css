@@ -1,3 +1,13 @@
+.job-item {
+  cursor: pointer;
+}
+
+.job-item:hover {
+  background-color: #f5f4f7;
+  border-radius: 8px;
+  transition-duration: .2s;
+}
+
 .job-item-expanded {
   background-color: #f5f4f7;
   padding: 8px 0;
@@ -26,7 +36,6 @@
   filter: invert(10%);
   height: 30px;
   transition-duration: .3s;
-  cursor: pointer;
 }
 
 .job-item-caret:hover {
@@ -183,6 +192,10 @@
 }
 
 @media (max-width: 860px) {
+  .job-item:hover {
+    background-color: transparent;
+  }
+
   .job-item-expanded {
     padding: 8px;
     margin: 0;
