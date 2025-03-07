@@ -20,12 +20,14 @@ function JobList({
   applicationStatusOptions, 
   clearResultsSearch,
   filterJobsByJobBoard,
+  filterJobsByStatus,
   waitingOnFetch }) {
     
   const [searchFieldText, setSearchFieldText] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [resultsPage, setResultsPage] = useState(1);
   const [resultsShown, setResultsShown] = useState(10);
+  const [statusFilter, setStatusFilter] = useState("");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [filteredByJobBoard, setFilteredByJobBoard] = useState(false);
 
@@ -97,6 +99,13 @@ function JobList({
     filterJobsByJobBoard(e.target.value);
   }
 
+  const handleStatusFilterChange = (e) => {
+    console.log(e.target.value);
+    setStatusFilter(e.target.value);
+
+    filterJobsByStatus(e.target.value);
+  }
+
   const totalPages = Math.ceil(categorizedJobs.length / resultsShown);
 
   return (
@@ -156,6 +165,18 @@ function JobList({
                   <option className="results-shown-option" value={10}>10</option>
                   <option className="results-shown-option" value={20}>20</option>
                   <option className="results-shown-option" value={100}>100</option>
+                </select>
+              </div>
+              <div className="results-filter">
+                <label className="filter-label">Only show</label>
+                <select 
+                  className="results-shown-select"
+                  onChange={handleStatusFilterChange} 
+                  value={statusFilter}>
+                  <option className="results-shown-option" default value={"All"}>All</option>
+                  <option className="results-shown-option" value={"Haven't heard back"}>Haven't heard back</option>
+                  <option className="results-shown-option" value={"In Progress"}>In Progress</option>
+                  <option className="results-shown-option" value={"Declined"}>Declined</option>
                 </select>
               </div>
             </div>

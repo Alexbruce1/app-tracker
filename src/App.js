@@ -192,6 +192,30 @@ function App() {
     }
   }
 
+  const filterJobsByStatus = (status) => {
+    if (status === "All") {
+      setFilterableJobList(jobList);
+    } else if (status === "Haven't heard back") {
+      const filteredData = jobList.filter((job) => {
+        return job.heard_back !== true;
+      });
+  
+      setFilterableJobList(filteredData);
+    } else if (status === "In Progress") {
+      const filteredData = jobList.filter((job) => {
+        return job.status === "Potentially Interviewing" || job.status === "Interviewing" || job.status === "Offer";
+      });
+
+      setFilterableJobList(filteredData);
+    } else {
+      const filteredData = jobList.filter((job) => {
+        return job.status === "Declined";
+      });
+  
+      setFilterableJobList(filteredData);
+    }
+  }
+
   return (
     <div className="App">
       <div className="header">
@@ -273,6 +297,7 @@ function App() {
           applicationStatusOptions={applicationStatusOptions}
           clearResultsSearch={clearResultsSearch}
           filterJobsByJobBoard={filterJobsByJobBoard}
+          filterJobsByStatus={filterJobsByStatus}
           waitingOnFetch={waitingOnFetch}/>
       )}
       <Stats jobList={jobList}/>
