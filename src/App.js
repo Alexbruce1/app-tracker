@@ -208,10 +208,12 @@ function App() {
 
       setFilterableJobList(filteredData);
     } else {
+      // This only gets triggered when selecting "Declined"
+
       const filteredData = jobList.filter((job) => {
         return job.status === "Declined";
       });
-  
+      
       setFilterableJobList(filteredData);
     }
   }

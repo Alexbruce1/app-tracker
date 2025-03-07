@@ -43,6 +43,10 @@ function JobList({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    filterJobsByStatus(statusFilter);
+  }, [statusFilter]);
+
   const thisWeekJobs = jobList.filter((job) => {
     const appliedDate = new Date(job.applied_date || job.created_at);
     return appliedDate >= startOfWeek;
@@ -100,10 +104,11 @@ function JobList({
   }
 
   const handleStatusFilterChange = (e) => {
-    console.log(e.target.value);
     setStatusFilter(e.target.value);
+  }
 
-    filterJobsByStatus(e.target.value);
+  const clearFilters = () => {
+    setStatusFilter("All");
   }
 
   const totalPages = Math.ceil(categorizedJobs.length / resultsShown);
@@ -179,6 +184,9 @@ function JobList({
                   <option className="results-shown-option" value={"Declined"}>Declined</option>
                 </select>
               </div>
+              <div className="results-filter">
+                <button className="filter-button button-element" onClick={clearFilters}>Clear Filters</button>
+              </div>
             </div>
           )}
         </div>
@@ -186,8 +194,8 @@ function JobList({
           <div className="job-item-main-legend">
             <p className="job-list-company-name">Company Name {filteredByJobBoard && <strong>{jobList.length}</strong>}</p>
             <select onChange={handleJobBoardFilter} className="job-list-job-board">
-              {jobBoards && jobBoards.map((job) => (
-                <option default={job === "Job Board"} >{job}</option>
+              {jobBoards && jobBoards.map((job, index) => (
+                <option default={job === "Job Board"} key={index}>{job}</option>
               ))}
             </select>
             {windowWidth > mobileWidthCutoff && <p className="job-list-status">Status</p> }
