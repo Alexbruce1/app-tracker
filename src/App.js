@@ -16,8 +16,10 @@ function App() {
   });
   const [jobList, setJobList] = useState([]);
   const [filterableJobList, setFilterableJobList] = useState([]);
+  const [filteredByJobBoard, setFilteredByJobBoard] = useState(false);
   const [FormExpanded, setFormExpanded] = useState(false);
   const [waitingOnFetch, setWaitingOnFetch] = useState(false);
+  const [statusFilter, setStatusFilter] = useState("");
 
   const jobBoards = [
   "Job Board",
@@ -55,6 +57,10 @@ function App() {
 
     getJobList();
   }, []);
+
+  useEffect(() => {
+    filterJobsByStatus(statusFilter);
+  }, [statusFilter]);
 
   const getJobList = async () => {
     setWaitingOnFetch(true);
@@ -147,6 +153,8 @@ function App() {
 
   const clearResultsSearch = () => {
     setFilterableJobList([]);
+    setFilteredByJobBoard(false);
+    setStatusFilter("All");
   }
 
   const updateApplication = async (id, element, updates) => {
@@ -183,13 +191,47 @@ function App() {
   const filterJobsByJobBoard = (jobBoard) => {
     if (jobBoard === "Job Board") {
       setFilterableJobList(jobList);
+      setFilteredByJobBoard(false);
     } else {
-      const filteredData = jobList.filter((job) => {
-        return job.job_board === jobBoard;
-      });
-  
-      setFilterableJobList(filteredData);
+      if (!filteredByJobBoard) {
+        const filteredData = filterableJobList.filter((job) => {
+          return job.job_board === jobBoard;
+        });
+
+        setFilterableJobList(filteredData);
+        setFilteredByJobBoard(true);
+      } else {
+        const filteredData = jobList.filter((job) => {
+          return job.job_board === jobBoard;
+        });
+    
+        setFilteredByJobBoard(true);
+        setFilterableJobList(filteredData);
+      }
     }
+  }
+
+  const filterJobsByStatus = (status) => {
+    let filteredData;
+    if (status === "All") {
+      setFilterableJobList(jobList);
+      return
+    } else if (status === "Haven't heard back") {
+      filteredData = filterableJobList.filter((job) => {
+        return job.heard_back !== true;
+      });
+    } else if (status === "In Progress") {
+      filteredData = filterableJobList.filter((job) => {
+        return job.status === "Potentially Interviewing" || job.status === "Interviewing" || job.status === "Offer";
+      });
+    } else {
+      // This only gets triggered when selecting "Declined"
+      filteredData = filterableJobList.filter((job) => {
+        return job.status === "Declined";
+      });
+    }
+    
+    setFilterableJobList(filteredData);
   }
 
   return (
@@ -273,7 +315,10 @@ function App() {
           applicationStatusOptions={applicationStatusOptions}
           clearResultsSearch={clearResultsSearch}
           filterJobsByJobBoard={filterJobsByJobBoard}
-          waitingOnFetch={waitingOnFetch}/>
+          waitingOnFetch={waitingOnFetch}
+          statusFilter={statusFilter}
+          setStatusFilter={setStatusFilter}
+          />
       )}
       <Stats jobList={jobList}/>
       <div className="app-header-background"></div>

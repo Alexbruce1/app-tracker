@@ -20,7 +20,9 @@ function JobList({
   applicationStatusOptions, 
   clearResultsSearch,
   filterJobsByJobBoard,
-  waitingOnFetch }) {
+  waitingOnFetch,
+  statusFilter,
+  setStatusFilter }) {
     
   const [searchFieldText, setSearchFieldText] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -97,6 +99,14 @@ function JobList({
     filterJobsByJobBoard(e.target.value);
   }
 
+  const handleStatusFilterChange = (e) => {
+    setStatusFilter(e.target.value);
+  }
+
+  const clearFilters = () => {
+    setStatusFilter("All");
+  }
+
   const totalPages = Math.ceil(categorizedJobs.length / resultsShown);
 
   return (
@@ -158,6 +168,21 @@ function JobList({
                   <option className="results-shown-option" value={100}>100</option>
                 </select>
               </div>
+              <div className="results-filter">
+                <label className="filter-label">Only show</label>
+                <select 
+                  className="results-shown-select"
+                  onChange={handleStatusFilterChange} 
+                  value={statusFilter}>
+                  <option className="results-shown-option" default value={"All"}>All</option>
+                  <option className="results-shown-option" value={"Haven't heard back"}>Haven't heard back</option>
+                  <option className="results-shown-option" value={"In Progress"}>In Progress</option>
+                  <option className="results-shown-option" value={"Declined"}>Declined</option>
+                </select>
+              </div>
+              <div className="results-filter">
+                <button className="filter-button button-element" onClick={clearFilters}>Clear Filters</button>
+              </div>
             </div>
           )}
         </div>
@@ -165,8 +190,8 @@ function JobList({
           <div className="job-item-main-legend">
             <p className="job-list-company-name">Company Name {filteredByJobBoard && <strong>{jobList.length}</strong>}</p>
             <select onChange={handleJobBoardFilter} className="job-list-job-board">
-              {jobBoards && jobBoards.map((job) => (
-                <option default={job === "Job Board"} >{job}</option>
+              {jobBoards && jobBoards.map((job, index) => (
+                <option default={job === "Job Board"} key={index}>{job}</option>
               ))}
             </select>
             {windowWidth > mobileWidthCutoff && <p className="job-list-status">Status</p> }
