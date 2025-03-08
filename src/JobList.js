@@ -20,14 +20,14 @@ function JobList({
   applicationStatusOptions, 
   clearResultsSearch,
   filterJobsByJobBoard,
-  filterJobsByStatus,
-  waitingOnFetch }) {
+  waitingOnFetch,
+  statusFilter,
+  setStatusFilter }) {
     
   const [searchFieldText, setSearchFieldText] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [resultsPage, setResultsPage] = useState(1);
   const [resultsShown, setResultsShown] = useState(10);
-  const [statusFilter, setStatusFilter] = useState("");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [filteredByJobBoard, setFilteredByJobBoard] = useState(false);
 
@@ -42,10 +42,6 @@ function JobList({
     
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  useEffect(() => {
-    filterJobsByStatus(statusFilter);
-  }, [statusFilter]);
 
   const thisWeekJobs = jobList.filter((job) => {
     const appliedDate = new Date(job.applied_date || job.created_at);
