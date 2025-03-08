@@ -193,29 +193,26 @@ function App() {
   }
 
   const filterJobsByStatus = (status) => {
+    let filteredData;
     if (status === "All") {
       setFilterableJobList(jobList);
+      return
     } else if (status === "Haven't heard back") {
-      const filteredData = jobList.filter((job) => {
+      filteredData = jobList.filter((job) => {
         return job.heard_back !== true;
       });
-  
-      setFilterableJobList(filteredData);
     } else if (status === "In Progress") {
-      const filteredData = jobList.filter((job) => {
+      filteredData = jobList.filter((job) => {
         return job.status === "Potentially Interviewing" || job.status === "Interviewing" || job.status === "Offer";
       });
-
-      setFilterableJobList(filteredData);
     } else {
       // This only gets triggered when selecting "Declined"
-
-      const filteredData = jobList.filter((job) => {
+      filteredData = jobList.filter((job) => {
         return job.status === "Declined";
       });
-      
-      setFilterableJobList(filteredData);
     }
+
+    setFilterableJobList(filteredData);
   }
 
   return (
