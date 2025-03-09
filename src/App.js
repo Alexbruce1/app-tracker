@@ -17,6 +17,7 @@ function App() {
   const [jobList, setJobList] = useState([]);
   const [filterableJobList, setFilterableJobList] = useState([]);
   const [filteredByJobBoard, setFilteredByJobBoard] = useState(false);
+  const [filteredByStatus, setFilteredByStatus] = useState(false);
   const [FormExpanded, setFormExpanded] = useState(false);
   const [waitingOnFetch, setWaitingOnFetch] = useState(false);
   const [statusFilter, setStatusFilter] = useState("");
@@ -212,25 +213,49 @@ function App() {
   }
 
   const filterJobsByStatus = (status) => {
+    // debugger
+
     let filteredData;
     if (status === "All") {
+      setFilteredByStatus(false);
       setFilterableJobList(jobList);
-      return
-    } else if (status === "Haven't heard back") {
-      filteredData = filterableJobList.filter((job) => {
-        return job.heard_back !== true;
-      });
-    } else if (status === "In Progress") {
-      filteredData = filterableJobList.filter((job) => {
-        return job.status === "Potentially Interviewing" || job.status === "Interviewing" || job.status === "Offer";
-      });
-    } else {
-      // This only gets triggered when selecting "Declined"
-      filteredData = filterableJobList.filter((job) => {
-        return job.status === "Declined";
-      });
+      return;
     }
     
+    if (!filteredByStatus) {
+      if (status === "Haven't heard back") {
+        filteredData = filterableJobList.filter((job) => {
+          return job.heard_back !== true;
+        });
+      } else if (status === "In Progress") {
+        filteredData = filterableJobList.filter((job) => {
+          return job.status === "Potentially Interviewing" || job.status === "Interviewing" || job.status === "Offer";
+        });
+      } else {
+        // This only gets triggered when selecting "Declined"
+        filteredData = filterableJobList.filter((job) => {
+          return job.status === "Declined";
+        });
+      }
+    } else {
+      if (status === "Haven't heard back") {
+        filteredData = jobList.filter((job) => {
+          return job.heard_back !== true;
+        });
+      } else if (status === "In Progress") {
+        filteredData = jobList.filter((job) => {
+          return job.status === "Potentially Interviewing" || job.status === "Interviewing" || job.status === "Offer";
+        });
+      } else {
+        // This only gets triggered when selecting "Declined"
+        filteredData = jobList.filter((job) => {
+          return job.status === "Declined";
+        });
+      }
+  
+    }
+
+    setFilteredByStatus(true);
     setFilterableJobList(filteredData);
   }
 
