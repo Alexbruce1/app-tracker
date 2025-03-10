@@ -213,8 +213,6 @@ function App() {
   }
 
   const filterJobsByStatus = (status) => {
-    // debugger
-
     let filteredData;
     if (status === "All") {
       setFilteredByStatus(false);
