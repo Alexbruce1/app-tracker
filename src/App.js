@@ -144,8 +144,10 @@ function App() {
       .from("applications")
       .select("*")
       .gte("company_name", query)
+
+    const sortedData = sortJobList(data);
       
-    setFilterableJobList(data);
+    setFilterableJobList(sortedData);
   };
 
   const filterExistingResults = (query) => {
