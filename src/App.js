@@ -74,18 +74,22 @@ function App() {
       return [];
     }
 
-    const sortedData = data.sort((a, b) => {
+    const sortedData = sortJobList(data);
+    
+    setJobList(sortedData);
+    setFilterableJobList(sortedData);
+    setWaitingOnFetch(false);
+  };
+
+  const sortJobList = (data) => {
+    return data.sort((a, b) => {
       if (new Date(a.applied_date) !== new Date(b.applied_date)) {
         return new Date(b.applied_date) - new Date(a.applied_date);
       } else {
         return new Date(b.created_at) - new Date(a.created_at);
       }
     });
-    
-    setJobList(sortedData);
-    setFilterableJobList(sortedData);
-    setWaitingOnFetch(false);
-  };
+  }
   
   const saveJob = async (e) => {
     e.preventDefault();
@@ -140,8 +144,10 @@ function App() {
       .from("applications")
       .select("*")
       .gte("company_name", query)
+
+    const sortedData = sortJobList(data);
       
-    setFilterableJobList(data);
+    setFilterableJobList(sortedData);
   };
 
   const filterExistingResults = (query) => {
@@ -213,8 +219,6 @@ function App() {
   }
 
   const filterJobsByStatus = (status) => {
-    // debugger
-
     let filteredData;
     if (status === "All") {
       setFilteredByStatus(false);

@@ -33,6 +33,7 @@ function JobListSearch({
         </button>
       )}
       <button
+        type="button"
         className={filtersOpen ? "job-search-filter button-element job-search-filter-open" : "job-search-filter button-element"}
         onClick={toggleFiltersOpen}>
         <img src={filter} className="job-search-icon filter-button-icon" />
