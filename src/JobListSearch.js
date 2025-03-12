@@ -15,7 +15,7 @@ function JobListSearch({
 }) {
   return (
     <form 
-      className="job-search-top-row" 
+      className={filtersOpen ? "job-search-top-row job-search-top-row-open" : "job-search-top-row"} 
       onSubmit={submitSearch}>
       <button className="button-element job-search-refresh" onClick={getJobList}>
         <img className="job-search-icon refresh-button-icon" src={refresh} />
