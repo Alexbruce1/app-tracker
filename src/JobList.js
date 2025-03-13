@@ -169,7 +169,7 @@ function JobList({
                 </select>
               </div>
               <div className="results-filter">
-                <label className="filter-label">Only show</label>
+                <label className="filter-label">Only show Status</label>
                 <select 
                   className="results-shown-select"
                   onChange={handleStatusFilterChange} 

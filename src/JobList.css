@@ -312,3 +312,36 @@
     height: 32px;
   }
 }
+
+@media (max-width: 700px) {
+  .job-search-top-row-open {
+    background-color: #f4f4f4;
+    padding: 6px;
+    height: unset;
+  }
+  
+  .job-search-field {
+    background-color: transparent;
+  }
+
+  .job-search-filter,
+  .job-search-submit {
+    height: 40px;
+  }
+
+  .job-item-filter-list {
+    flex-wrap: wrap;
+  }
+
+  .results-filter {
+    margin: 4px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .filter-button {
+    font-size: 16px;
+    margin-left: auto;
+  }
+}
