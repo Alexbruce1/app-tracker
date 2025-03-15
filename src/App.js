@@ -140,6 +140,11 @@ function App() {
   };
 
   const filterResultsByCompanyName = async (query) => {
+    if (!query) {
+      getJobList();
+      return;
+    }
+
     let { data, error } = await supabase
       .from("applications")
       .select("*")
@@ -155,7 +160,9 @@ function App() {
       return job.company_name.toLowerCase().includes(query);
     });
 
-    setFilterableJobList(filteredData);
+    const sortedData = sortJobList(filteredData);
+
+    setFilterableJobList(sortedData);
   };
 
   const clearResultsSearch = () => {

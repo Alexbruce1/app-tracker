@@ -13,6 +13,11 @@ function JobListSearch({
   filter,
   search
 }) {
+
+  const test = () => {
+    console.log("yep")
+  }
+
   return (
     <form 
       className={filtersOpen ? "job-search-top-row job-search-top-row-open" : "job-search-top-row"} 
@@ -38,8 +43,12 @@ function JobListSearch({
         onClick={toggleFiltersOpen}>
         <img src={filter} className="job-search-icon filter-button-icon" />
       </button>
-      <button className="job-search-submit button-element">
-        <img src={search} className="job-search-icon filter-button-icon" />
+      <button 
+        className="job-search-submit button-element"
+        onClick={submitSearch}>
+        <img 
+          src={search} 
+          className="job-search-icon filter-button-icon" />
       </button>
     </form>
   );
