@@ -158,7 +158,7 @@ function JobList({
           {filtersOpen && (
             <div className="job-item-filter-list job-list-child">
               <div className="results-filter">
-                <label className="filter-label">Results shown</label>
+                <label className="filter-label">Results Shown</label>
                 <select 
                   className="results-shown-select"
                   onChange={handleResultsShownChange} 
@@ -169,7 +169,7 @@ function JobList({
                 </select>
               </div>
               <div className="results-filter">
-                <label className="filter-label">Only show Status</label>
+                <label className="filter-label">Only Show Status</label>
                 <select 
                   className="results-shown-select"
                   onChange={handleStatusFilterChange} 
