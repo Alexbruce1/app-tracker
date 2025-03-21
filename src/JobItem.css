@@ -198,8 +198,8 @@
   }
 
   .job-item-expanded {
+    border: 1px solid var(--main-blue);
     padding: 8px;
-    margin: 0;
   }
 
   .job-item-inner-container p {
