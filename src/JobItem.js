@@ -186,6 +186,15 @@ function JobItem({
                   })}
               </select>
             )}
+            <select className="interview-steps-dropdown">
+              <option>Most Recent Communication</option>
+              <option>Phone Screen</option>
+              <option>Code Challenge</option>
+              <option>Technical Interview</option>
+              <option>Behavioral Interview</option>
+              <option>Onsite Interview</option>
+              <option>Offer</option>
+            </select>
 
             {windowWidth > mobileWidthCutoff && (
               <button className="delete-item-button" onClick={handleDeletePress}>
