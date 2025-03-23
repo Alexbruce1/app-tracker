@@ -72,7 +72,8 @@
   text-align: center;
 }
 
-.job-item-status {
+.job-item-status,
+.interview-steps-dropdown {
   text-align: center;
 }
 
@@ -106,7 +107,8 @@
   align-items: center;
 }
 
-.status-dropdown {
+.status-dropdown,
+.interview-steps-dropdown {
   background-color: transparent;
   border: 2px solid #DDD;
   border-radius: 8px;
@@ -208,9 +210,11 @@
 
   .job-item-bottom-row-field-container {
     padding: 0;
+    flex-wrap: wrap;
   }
 
-  .status-dropdown {
+  .status-dropdown,
+  .interview-steps-dropdown {
     background-color: #FFFFFF80;  
     border: none;
     padding: 8px;
