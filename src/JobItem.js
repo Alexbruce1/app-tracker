@@ -162,7 +162,7 @@ function JobItem({
       </div>
       {isExpanded && (
         <div className="job-item-bottom-row">
-          <div className="job-item-bottom-row-field-container">
+          <div className="job-item-middle-row-field-container">
             <div className="job-item-bottom-row-field custom-cover-letter">
               <label className="custom-checkbox">
                 <input 
