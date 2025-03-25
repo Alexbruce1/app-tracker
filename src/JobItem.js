@@ -169,8 +169,7 @@ function JobItem({
                   type="checkbox" 
                   name="custom_cover_letter"
                   onChange={handleFieldUpdates}
-                  checked={customCoverLetter}
-                  />
+                  checked={customCoverLetter}/>
                 <span className="checkbox"></span>
               </label>
               <p className="custom-letter-text">Custom Cover Letter</p>

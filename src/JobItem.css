@@ -86,6 +86,7 @@
 .job-item-bottom-row-field-container {
   display: flex;
   justify-content: space-between;
+  padding-left: 8px;
   align-items: center;
 }
 
