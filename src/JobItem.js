@@ -162,15 +162,14 @@ function JobItem({
       </div>
       {isExpanded && (
         <div className="job-item-bottom-row">
-          <div className="job-item-bottom-row-field-container">
+          <div className="job-item-middle-row-field-container">
             <div className="job-item-bottom-row-field custom-cover-letter">
               <label className="custom-checkbox">
                 <input 
                   type="checkbox" 
                   name="custom_cover_letter"
                   onChange={handleFieldUpdates}
-                  checked={customCoverLetter}
-                  />
+                  checked={customCoverLetter}/>
                 <span className="checkbox"></span>
               </label>
               <p className="custom-letter-text">Custom Cover Letter</p>

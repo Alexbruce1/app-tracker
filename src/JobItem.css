@@ -82,9 +82,11 @@
 }
 
 .job-item-bottom-row-description-container,
+.job-item-middle-row-field-container,
 .job-item-bottom-row-field-container {
   display: flex;
   justify-content: space-between;
+  padding-left: 8px;
   align-items: center;
 }
 
@@ -208,9 +210,13 @@
     width: 35%;
   }
 
-  .job-item-bottom-row-field-container {
+  .job-item-middle-row-field-container {
     padding: 0;
     flex-wrap: wrap;
+  }
+
+  .job-item-bottom-row-field-container {
+    padding: 0;
   }
 
   .status-dropdown,
@@ -218,6 +224,12 @@
     background-color: #FFFFFF80;  
     border: none;
     padding: 8px;
+  }
+
+  .interview-steps-dropdown {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 6px;
   }
 
   .job-item-notes,
