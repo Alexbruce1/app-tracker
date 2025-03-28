@@ -44,6 +44,16 @@ function App() {
     "Declined"
   ];
 
+  const recentCommunicationOptions = [
+    "Initial Application",
+    "Phone Screen",
+    "Code Challenge",
+    "Technical Interview",
+    "Behavioral Interview",
+    "Onsite Interview",
+    "Offer",
+  ]
+
   useEffect(() => {
     const isLocalhost = window.location.hostname === "localhost";
     document.title = isLocalhost ? "App Tracker - local" : "App Tracker";
@@ -354,6 +364,7 @@ function App() {
           waitingOnFetch={waitingOnFetch}
           statusFilter={statusFilter}
           setStatusFilter={setStatusFilter}
+          recentCommunicationOptions={recentCommunicationOptions}
           />
       )}
       <Stats jobList={jobList}/>

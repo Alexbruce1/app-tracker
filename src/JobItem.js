@@ -9,14 +9,16 @@ function JobItem({
   jobBoard, 
   notes, 
   createdAt, 
-  appliedDate, 
+  appliedDate,
+  recentCommunication, 
   deleteApplication, 
   updateApplication, 
   heardBack, 
   customLetter, 
   applicationStatus, 
   applicationStatusOptions,
-  mobileWidthCutoff
+  mobileWidthCutoff,
+  recentCommunicationOptions
 }) {
     
   const [isExpanded, setIsExpanded] = useState(false);
@@ -25,6 +27,7 @@ function JobItem({
   const [updateHeardBack, setUpdateHeardBack] = useState(heardBack);
   const [customCoverLetter, setCustomCoverLetter] = useState(customLetter);
   const [appStatus, setAppStatus] = useState(applicationStatus);
+  const [recentCommunicationStatus, setRecentCommunicationStatus] = useState(recentCommunication);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -49,6 +52,10 @@ function JobItem({
     setNewNotes(notes);
     setAppStatus(applicationStatus);
   }, [notes, applicationStatus]);
+
+  useEffect(() => {
+    setRecentCommunicationStatus(recentCommunication);
+  }, [recentCommunication]);
 
   const handleExpansion = (e) => {
     e.stopPropagation(); 
@@ -180,19 +187,18 @@ function JobItem({
                 onChange={handleFieldUpdates} 
                 name="status"
                 value={appStatus || "Application Status"}>
-                  {applicationStatusOptions.map(option => {
-                    return <option key={option} value={option}>{option}</option>
+                  {applicationStatusOptions.map((option, index) => {
+                    return <option key={index} value={option}>{option}</option>
                   })}
               </select>
             )}
-            <select className="interview-steps-dropdown">
-              <option>Most Recent Communication</option>
-              <option>Phone Screen</option>
-              <option>Code Challenge</option>
-              <option>Technical Interview</option>
-              <option>Behavioral Interview</option>
-              <option>Onsite Interview</option>
-              <option>Offer</option>
+            <select 
+              className="interview-steps-dropdown" 
+              value={recentCommunicationStatus || recentCommunicationOptions[0]} 
+              name="recent_communication">
+              {recentCommunicationOptions.map((option, index) => {
+                return <option key={index} value={option}>{option}</option>
+              })}
             </select>
 
             {windowWidth > mobileWidthCutoff && (
