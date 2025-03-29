@@ -14,10 +14,6 @@ function JobListSearch({
   search
 }) {
 
-  const test = () => {
-    console.log("yep")
-  }
-
   return (
     <form 
       className={filtersOpen ? "job-search-top-row job-search-top-row-open" : "job-search-top-row"} 

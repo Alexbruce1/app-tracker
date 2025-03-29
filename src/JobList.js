@@ -22,7 +22,8 @@ function JobList({
   filterJobsByJobBoard,
   waitingOnFetch,
   statusFilter,
-  setStatusFilter }) {
+  setStatusFilter,
+  recentCommunicationOptions }) {
     
   const [searchFieldText, setSearchFieldText] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -215,6 +216,7 @@ function JobList({
                 notes={item.notes}
                 createdAt={item.created_at}
                 appliedDate={item.applied_date}
+                recentCommunication={item.recent_communication}
                 deleteApplication={deleteApplication}
                 updateApplication={updateApplication}
                 heardBack={item.heard_back}
@@ -222,6 +224,7 @@ function JobList({
                 applicationStatus={item.status}
                 applicationStatusOptions={applicationStatusOptions}
                 mobileWidthCutoff={mobileWidthCutoff}
+                recentCommunicationOptions={recentCommunicationOptions}
               />
             );
           })}
