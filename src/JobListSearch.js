@@ -47,7 +47,7 @@ function JobListSearch({
           className="job-search-icon filter-button-icon" />
       </button>
     </form>
-  );
+  )
 }
 
 export default JobListSearch;
