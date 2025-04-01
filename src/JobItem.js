@@ -132,9 +132,8 @@ function JobItem({
 
   const updateInterviewSteps = e => {
     const value = e.target.value;
-    console.log(value);
-    // setRecentCommunicationStatus(value);
-    // handleAppUpdate(id, "recent_communication", value);
+    setRecentCommunicationStatus(value);
+    handleAppUpdate(id, "recent_communication", value);
   }
 
   return (
