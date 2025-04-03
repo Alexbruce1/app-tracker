@@ -130,6 +130,12 @@ function JobItem({
     setNewNotes(e.target.value)
   }
 
+  const updateInterviewSteps = e => {
+    const value = e.target.value;
+    setRecentCommunicationStatus(value);
+    handleAppUpdate(id, "recent_communication", value);
+  }
+
   return (
     <div 
       className={isExpanded ? "job-item job-item-expanded" : "job-item"}
@@ -195,6 +201,7 @@ function JobItem({
             <select 
               className="interview-steps-dropdown" 
               value={recentCommunicationStatus || recentCommunicationOptions[0]} 
+              onChange={updateInterviewSteps}
               name="recent_communication">
               {recentCommunicationOptions.map((option, index) => {
                 return <option key={index} value={option}>{option}</option>
