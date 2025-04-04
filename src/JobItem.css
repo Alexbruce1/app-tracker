@@ -197,8 +197,12 @@
 }
 
 @media (max-width: 860px) {
+  .job-item {
+    background-color: unset;
+  }
+
   .job-item:hover {
-    background-color: transparent;
+    background-color: unset;
   }
 
   .job-item-expanded {
@@ -221,7 +225,7 @@
 
   .status-dropdown,
   .interview-steps-dropdown {
-    background-color: #FFFFFF80;  
+    background-color: #f5f4f7;  
     border: none;
     padding: 8px;
   }
