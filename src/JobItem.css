@@ -75,6 +75,7 @@
 .job-item-certified-icon {
   height: 16px;
   margin-left: 5px;
+  filter: invert(20%);
 }
 
 .job-item-board {
