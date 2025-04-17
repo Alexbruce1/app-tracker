@@ -32,6 +32,8 @@ function App() {
   "BuiltIn",
   "Indeed",
   "Zip Recruiter",
+  "Merit America Slack",
+  "Turing Employment Commons Slack",
   "Other",
   ]
 
