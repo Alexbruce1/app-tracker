@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import clear from "./assets/clear.svg";
 import caret from "./assets/caret.svg";
+import check from "./assets/check.svg";
 import "./JobItem.css";
 
 function JobItem({ 
@@ -16,6 +17,7 @@ function JobItem({
   heardBack, 
   customLetter, 
   applicationStatus, 
+  certified,
   applicationStatusOptions,
   mobileWidthCutoff,
   recentCommunicationOptions
@@ -148,7 +150,12 @@ function JobItem({
             src={caret}/>
         </div>
         <div className="job-item-inner-container">
-          <p className="job-item-company" onClick={e => handleExpansion(e)}>{companyName}</p>
+          <p className={certified ? "job-item-company job-item-company-certified" : "job-item-company"} onClick={e => handleExpansion(e)}>
+            {companyName}
+            {certified && (
+                <img className="job-item-certified-icon" src={check} />
+            )}
+          </p>
           {(!isExpanded || windowWidth > mobileWidthCutoff) && (
             <p className="job-item-board" onClick={e => handleExpansion(e)}>{displayedJobBoard}</p>
           )}

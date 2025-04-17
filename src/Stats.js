@@ -5,6 +5,7 @@ function Stats({ jobList }) {
   const [customCoverLetterCount, setCustomCoverLetterCount] = useState(0);
   const [heardBackCount, setHeardBackCount] = useState(0);
   const [haventHeardBackCount, setHaventHeardBackCount] = useState(0);
+  const [certifiedCount, setCertifiedCount] = useState(0);
   const [BuiltInCount, setBuiltInCount] = useState(0);
   const [IndeedCount, setIndeedCount] = useState(0);
   const [LinkedInCount, setLinkedInCount] = useState(0);
@@ -13,9 +14,11 @@ function Stats({ jobList }) {
   const [statusDeclined, setStatusDeclined] = useState(0);
 
   useEffect(() => {
+    console.log("Job List:", jobList);
     const jobCount = jobList.length;
     const customCoverLetterCount = jobList.filter(job => job.custom_cover_letter).length;
     const heardBackCount = jobList.filter(job => job.heard_back).length;
+    const certifiedCount = jobList.filter(job => job.coui_certified).length;
     const builtin = jobList.filter(job => job.job_board === "BuiltIn").length;
     const indeed = jobList.filter(job => job.job_board === "Indeed").length;
     const linkedin = jobList.filter(job => job.job_board === "LinkedIn").length;
@@ -24,6 +27,7 @@ function Stats({ jobList }) {
 
     setCustomCoverLetterCount(customCoverLetterCount);
     setHeardBackCount(heardBackCount);
+    setCertifiedCount(certifiedCount);
     setHaventHeardBackCount(jobList.length - heardBackCount);
     setBuiltInCount(builtin);
     setIndeedCount(indeed);
@@ -72,6 +76,14 @@ function Stats({ jobList }) {
           </p>
           <p className="stats-count-p">
             Custom Cover Letters
+          </p>
+        </div>
+        <div className="stats-count-text">
+          <p className="stats-count-p stats-count-bold">
+            {certifiedCount} 
+          </p>
+          <p className="stats-count-p">
+            Certified on COUI Website
           </p>
         </div>
       </div>

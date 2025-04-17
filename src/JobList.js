@@ -222,6 +222,7 @@ function JobList({
                 heardBack={item.heard_back}
                 customLetter={item.custom_cover_letter}
                 applicationStatus={item.status}
+                certified={item.coui_certified}
                 applicationStatusOptions={applicationStatusOptions}
                 mobileWidthCutoff={mobileWidthCutoff}
                 recentCommunicationOptions={recentCommunicationOptions}

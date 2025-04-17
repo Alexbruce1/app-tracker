@@ -60,12 +60,22 @@
 
 .job-item-company {
   text-align: left;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
   height: 16px;
   overflow-x: hidden;
   text-overflow: ellipsis;
+}
+
+.job-item-company-certified {
+  font-weight: 800;
+}
+
+.job-item-certified-icon {
+  height: 16px;
+  margin-left: 5px;
+  filter: invert(20%);
 }
 
 .job-item-board {
