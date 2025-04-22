@@ -193,7 +193,7 @@ function JobItem({
           )}
           <p className="job-item-applied-date" onClick={e => handleExpansion(e)}>
             {!certified && (
-              <img className="job-item-copy-icon" src={copy} onClick={handleCopyIconClick} />
+              <img className="job-item-copy-icon" src={copy} onClick={handleCopyIconClick} title="Copy the company name & certify on COUI" />
             )}
             {formattedDate}
           </p>
