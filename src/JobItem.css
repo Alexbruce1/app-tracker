@@ -63,7 +63,7 @@
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
-  height: 16px;
+  height: 19px;
   overflow-x: hidden;
   text-overflow: ellipsis;
 }
@@ -76,6 +76,17 @@
   height: 16px;
   margin-left: 5px;
   filter: invert(20%);
+}
+
+.job-item-copy-icon {
+  height: 16px;
+  margin-right: 5px;
+  filter: invert(20%);
+}
+
+.job-item-copy-icon:hover {
+  filter: invert(0%);
+  /* height: 17px; */
 }
 
 .job-item-board {

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import clear from "./assets/clear.svg";
 import caret from "./assets/caret.svg";
 import check from "./assets/check.svg";
+import copy from "./assets/copy.svg";
 import "./JobItem.css";
 
 function JobItem({ 
@@ -20,7 +21,8 @@ function JobItem({
   certified,
   applicationStatusOptions,
   mobileWidthCutoff,
-  recentCommunicationOptions
+  recentCommunicationOptions,
+  getJobList
 }) {
     
   const [isExpanded, setIsExpanded] = useState(false);
@@ -138,6 +140,18 @@ function JobItem({
     handleAppUpdate(id, "recent_communication", value);
   }
 
+  const handleCopyIconClick = e => {
+    e.stopPropagation();
+    navigator.clipboard.writeText(companyName);
+    
+    handleAppUpdate(id, "coui_certified", true);
+
+    setTimeout(() => {
+      getJobList();
+    }, 500);
+
+  }
+
   return (
     <div 
       className={isExpanded ? "job-item job-item-expanded" : "job-item"}
@@ -177,7 +191,12 @@ function JobItem({
               !appStatus ? "-" :
               appStatus}</p>
           )}
-          <p className="job-item-applied-date" onClick={e => handleExpansion(e)}>{formattedDate}</p>
+          <p className="job-item-applied-date" onClick={e => handleExpansion(e)}>
+            {!certified && (
+              <img className="job-item-copy-icon" src={copy} onClick={handleCopyIconClick} title="Copy the company name & certify on COUI" />
+            )}
+            {formattedDate}
+          </p>
         </div>
       </div>
       {isExpanded && (
