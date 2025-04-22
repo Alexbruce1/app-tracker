@@ -226,6 +226,7 @@ function JobList({
                 applicationStatusOptions={applicationStatusOptions}
                 mobileWidthCutoff={mobileWidthCutoff}
                 recentCommunicationOptions={recentCommunicationOptions}
+                getJobList={getJobList}
               />
             );
           })}

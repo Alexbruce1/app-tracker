@@ -14,7 +14,6 @@ function Stats({ jobList }) {
   const [statusDeclined, setStatusDeclined] = useState(0);
 
   useEffect(() => {
-    console.log("Job List:", jobList);
     const jobCount = jobList.length;
     const customCoverLetterCount = jobList.filter(job => job.custom_cover_letter).length;
     const heardBackCount = jobList.filter(job => job.heard_back).length;
