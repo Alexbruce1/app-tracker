@@ -165,10 +165,10 @@ function JobItem({
         </div>
         <div className="job-item-inner-container">
           <p className={certified ? "job-item-company job-item-company-certified" : "job-item-company"} onClick={e => handleExpansion(e)}>
-            {companyName}
             {certified && (
                 <img className="job-item-certified-icon" src={check} />
             )}
+            {companyName}
           </p>
           {(!isExpanded || windowWidth > mobileWidthCutoff) && (
             <p className="job-item-board" onClick={e => handleExpansion(e)}>{displayedJobBoard}</p>
