@@ -24,7 +24,7 @@ function JobListSearch({
       <input
         type="text"
         className="job-search-field"
-        placeholder="Search for a Company"
+        placeholder="Search for a company"
         value={searchFieldText}
         onChange={handleTextInput}
       />

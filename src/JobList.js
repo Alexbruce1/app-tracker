@@ -65,6 +65,7 @@ function JobList({
 
   const handleTextInput = (e) => {
     setSearchFieldText(e.target.value);
+    setResultsPage(1);
     filterExistingResults(e.target.value.toLowerCase());
   };
   
